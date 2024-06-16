@@ -16,8 +16,9 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->string('landmark')->nullable();
+            $table->decimal('price')->default(0);
             $table->string('status')->nullable();
-            $table->text('extras')->nullable();;
+            $table->text('extras')->nullable();
             $table->timestamps();
         });
     }

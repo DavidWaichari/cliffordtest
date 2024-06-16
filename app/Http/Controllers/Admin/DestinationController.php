@@ -14,7 +14,7 @@ class DestinationController extends Controller
      */
     public function index()
     {
-        $destinations = Destination::all();
+        $destinations = Destination::orderBy('created_at', 'desc')->get();
         return response()->json(['success' => true, 'destinations' => $destinations], 200);
     }
 
@@ -23,20 +23,21 @@ class DestinationController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'landmark' => 'nullable|string',
-            'status' => 'nullable|string',
-            'extras' => 'nullable|string',
+            'description' => 'required|string',
+            'landmark' => 'required|string|max:255',
+            'status' => 'required|string',
+            'image' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json(['success' => false, 'error' => $validator->errors()], 400);
+        $destination = Destination::create($request->all());
+
+        if ($request->hasFile('image')) {
+            $destination->addMedia($request->file('image'))->toMediaCollection('images');
         }
 
-        $destination = Destination::create($validator->validated());
-        return response()->json(['success' => true, 'destination' => $destination], 201);
+        return response()->json(['success' => true, 'message' => 'Destination created successfully']);
     }
 
     /**
@@ -57,21 +58,34 @@ class DestinationController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'landmark' => 'nullable|string',
-            'status' => 'nullable|string',
-            'extras' => 'nullable|string',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['success' => false, 'error' => $validator->errors()], 400);
-        }
-
         try {
+            $this->validate($request, [
+                'name' => 'required|string|max:255',
+                'description' => 'required|string',
+                'landmark' => 'nullable|string',
+                'status' => 'nullable|string',
+                'image' => 'nullable|image|max:2048', // Assuming image upload
+            ]);
+
             $destination = Destination::findOrFail($id);
-            $destination->update($validator->validated());
+
+            // Clear existing media (if any)
+            $destination->clearMediaCollection('images');
+
+            // Update destination fields
+            $destination->update([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+                'landmark' => $request->input('landmark'),
+                'status' => $request->input('status'),
+            ]);
+
+            // Handle image upload if provided
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $media = $destination->addMedia($image)->toMediaCollection('images');
+            }
+
             return response()->json(['success' => true, 'destination' => $destination], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'error' => $e->getMessage()], 404);
@@ -85,6 +99,8 @@ class DestinationController extends Controller
     {
         try {
             $destination = Destination::findOrFail($id);
+            // Delete all media associated with the destination
+            $destination->clearMediaCollection();
             $destination->delete();
             return response()->json(['success' => true], 204);
         } catch (\Exception $e) {

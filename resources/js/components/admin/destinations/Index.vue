@@ -54,12 +54,15 @@
 
                                 <EasyDataTable
                                     :headers="headers"
-                                    :items="filteredDestinations"
+                                    :items="items"
                                     :search-field="searchField"
                                     :search-value="searchValue"
+                                    show-index
                                 >
-                                    <template #item-details="item">
-                                        <a @click.prevent="viewDetails(item)" href="#" class="theme-btn theme-btn-small me-2" data-bs-toggle="tooltip" data-placement="top" aria-label="View details" data-bs-original-title="View details"><i class="la la-eye"></i></a>
+                                    <template #item-actions="item">
+                                        <a @click.prevent="viewDetails(item)" href="#" class="theme-btn theme-btn-small me-2" data-bs-toggle="modal" data-bs-target="#loginPopupForm"><i class="la la-eye"></i></a>
+                                        <router-link :to="`/admin/destinations/${item.id}/edit`" class="theme-btn theme-btn-small me-2" aria-label="Edit details" data-bs-original-title="Edit details"><i class="la la-edit"></i></router-link>
+                                        <a @click.prevent="confirmDelete(item)" href="#" class="theme-btn theme-btn-small me-2" data-bs-toggle="tooltip" data-placement="top" aria-label="Delete details" data-bs-original-title="Delete details"><i class="la la-trash"></i></a>
                                     </template>
                                 </EasyDataTable>
                             </div>
@@ -70,49 +73,49 @@
                 </div>
                 <!-- end row -->
                 <div class="border-top mt-5"></div>
-                <div class="row align-items-center">
-                    <div class="col-lg-7">
-                        <div class="copy-right padding-top-30px">
-                            <p class="copy__desc">
-                                © Copyright Trizen <span id="get-year">2024</span>. Made
-                                with <span class="la la-heart"></span> by
-                                <a href="https://themeforest.net/user/techydevs/portfolio">TechyDevs</a>
-                            </p>
-                        </div>
-                        <!-- end copy-right -->
-                    </div>
-                    <!-- end col-lg-7 -->
-                    <div class="col-lg-5">
-                        <div class="copy-right-content text-end padding-top-30px">
-                            <ul class="social-profile">
-                                <li>
-                                    <a href="#"><i class="lab la-facebook-f"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="lab la-twitter"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="lab la-instagram"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="lab la-linkedin-in"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- end copy-right-content -->
-                    </div>
-                    <!-- end col-lg-5 -->
-                </div>
+                <Footer></Footer>
                 <!-- end row -->
             </div>
             <!-- end container-fluid -->
         </div>
         <!-- end dashboard-main-content -->
     </div>
+    <div class="modal-popup">
+        <div
+            class="modal fade"
+            id="loginPopupForm"
+            tabindex="-1"
+            role="dialog"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div>
+                            <p class="font-size-14">Picture</p>
+                        </div>
+                        <button
+                            type="button"
+                            class="btn-close close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        >
+                            <span aria-hidden="true" class="la la-close"></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img :src="image_url" height="400" width="400">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect, onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
+import Footer from '../shared/Footer.vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 import { Header, Item } from 'vue3-easy-data-table';
@@ -124,42 +127,52 @@ const headers: Header[] = [
     { text: 'NAME', value: 'name' },
     { text: 'DESCRIPTION', value: 'description' },
     { text: 'LANDMARK', value: 'landmark' },
+    { text: 'PRICE', value: 'price' },
     { text: 'STATUS', value: 'status', sortable: true },
-    { text: 'DETAILS', value: 'details' },
+    { text: 'Actions', value: 'actions' },
 ];
 
 const items: Item[] = ref([]);
-
-const filteredDestinations = ref<Item[]>([]);
+const router = useRouter();
+const image_url = ref('');
 
 const viewDetails = (item: Item) => {
-    alert(`Viewing details for: ${item.name}`);
+    image_url.value = item.media_url
+};
+
+const confirmDelete = (item: Item) => {
+    if (confirm(`Are you sure you want to delete ${item.name}?`)) {
+        deleteItem(item);
+    }
+};
+
+const deleteItem = async (item: Item) => {
+    try {
+        await axios.delete(`/api/admin/destinations/${item.id}`);
+        items.value = items.value.filter(i => i.id !== item.id);
+    } catch (error) {
+        console.error('Error deleting destination:', error);
+    }
 };
 
 onMounted(async () => {
     try {
         const response = await axios.get('/api/admin/destinations');
         items.value = response.data.destinations; // Update reactive reference
-        filteredDestinations.value = [...items.value]; // Initially, display all destinations
     } catch (error) {
         console.error('Error fetching destinations:', error);
-    }
-});
-
-watchEffect(() => {
-    if (!searchValue.value.trim()) {
-        filteredDestinations.value = [...items.value]; // Reset to display all destinations when search input is empty
-    } else {
-        filteredDestinations.value = items.value.filter((item) =>
-            searchField.some((field) =>
-                item[field]?.toLowerCase().includes(searchValue.value.trim().toLowerCase())
-            )
-        );
     }
 });
 </script>
 
 <style scoped>
+.form-select {
+    height: 50px;
+    line-height: inherit;
+    padding: 10px 20px 10px 40px;
+    font-size: 13px;
+    color: #0d233e;
+}
 button {
     background-color: #007bff;
     color: white;

@@ -1,5 +1,6 @@
 <template>
     <div class="dashboard-content-wrap">
+        <!-- Breadcrumb Section -->
         <div class="dashboard-bread dashboard--bread dashboard-bread-2">
             <div class="container-fluid">
                 <div class="row align-items-center">
@@ -7,99 +8,77 @@
                         <div class="breadcrumb-content">
                             <div class="section-heading">
                                 <h2 class="sec__title font-size-30 text-white">
-                                    Destinations
+                                    Edit Destination
                                 </h2>
                             </div>
                         </div>
-                        <!-- end breadcrumb-content -->
                     </div>
-                    <!-- end col-lg-6 -->
                     <div class="col-lg-6">
                         <div class="breadcrumb-list text-end">
                             <ul class="list-items">
                                 <li><a href="index.html" class="text-white">Home</a></li>
                                 <li>Dashboard</li>
-                                <li>Add Destination</li>
+                                <li>Edit Destination</li>
                             </ul>
                         </div>
-                        <!-- end breadcrumb-list -->
                     </div>
-                    <!-- end col-lg-6 -->
                 </div>
-                <!-- end row -->
             </div>
         </div>
-        <!-- end dashboard-bread -->
+
+        <!-- Main Content -->
         <div class="dashboard-main-content">
             <div class="container-fluid">
                 <form @submit.prevent="submitForm">
+                    <!-- Existing Form Fields for Update -->
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-box">
                                 <div class="form-title-wrap">
                                     <h3 class="title">
-                                        <i class="la la-gear me-2 text-gray"></i>Add destination information for your flights
+                                        <i class="la la-gear me-2 text-gray"></i>Edit destination information
                                     </h3>
                                 </div>
-                                <!-- form-title-wrap -->
                                 <div class="form-content contact-form-action">
                                     <div class="row">
                                         <div class="col-lg-6">
-                                            <!-- Place Name Input -->
                                             <div class="input-box">
                                                 <label class="label-text">
                                                     Place Name
                                                 </label>
                                                 <div class="form-group">
                                                     <span class="la la-briefcase form-icon"></span>
-                                                    <input class="form-control" type="text" placeholder="Destination name" v-model="form.name" required name="name">
-                                                    <div class="invalid-feedback">Please provide a destination name.</div>
+                                                    <input class="form-control" type="text" placeholder="Destination name" v-model="form.name" required>
+                                                    <div v-if="formErrors.name" class="invalid-feedback">{{ formErrors.name }}</div>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="col-lg-6">
-                                            <!-- Description Textarea -->
                                             <div class="input-box">
                                                 <label class="label-text">
                                                     Description
                                                 </label>
                                                 <div class="form-group">
                                                     <span class="la la-briefcase form-icon"></span>
-                                                    <textarea class="form-control" name="description" placeholder="Destination description" v-model="form.description" required></textarea>
-                                                    <div class="invalid-feedback">Please provide a destination description.</div>
+                                                    <textarea class="form-control" placeholder="Destination description" v-model="form.description" required></textarea>
+                                                    <div v-if="formErrors.description" class="invalid-feedback">{{ formErrors.description }}</div>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="col-lg-6">
-                                            <!-- Landmark Name Input -->
                                             <div class="input-box">
                                                 <label class="label-text">
                                                     Landmark Name
                                                 </label>
                                                 <div class="form-group">
                                                     <span class="la la-briefcase form-icon"></span>
-                                                    <input class="form-control" name="landmark" type="text" placeholder="Landmark name" v-model="form.landmark" required>
-                                                    <div class="invalid-feedback">Please provide a landmark name.</div>
+                                                    <input class="form-control" type="text" placeholder="Landmark name" v-model="form.landmark" required>
+                                                    <div v-if="formErrors.landmark" class="invalid-feedback">{{ formErrors.landmark }}</div>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="col-lg-6">
-                                            <!-- Status Select -->
-                                            <div class="input-box">
-                                                <label class="label-text">Status</label>
-                                                <div class="form-group w-100">
-                                                    <select class="form-select" v-model="form.status" required name="status">
-                                                        <option value="Active">Active</option>
-                                                        <option value="Inactive">Inactive</option>
-                                                    </select>
-                                                    <div class="invalid-feedback">Please select a status.</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                         <div class="col-lg-6">
                                             <!-- Landmark Name Input -->
                                             <div class="input-box">
@@ -113,64 +92,78 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-lg-6">
+                                            <div class="input-box">
+                                                <label class="label-text">Status</label>
+                                                <div class="form-group w-100">
+                                                    <select class="form-select" v-model="form.status" required>
+                                                        <option value="Active">Active</option>
+                                                        <option value="Inactive">Inactive</option>
+                                                    </select>
+                                                    <div v-if="formErrors.status" class="invalid-feedback">{{ formErrors.status }}</div>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <div class="col-lg-6">
-                                            <!-- File Upload Input -->
                                             <div class="input-box">
                                                 <label class="label-text">
                                                     Upload Image
                                                 </label>
                                                 <div class="form-group">
                                                     <input class="form-control" type="file" @change="handleFileUpload">
-                                                    <div class="invalid-feedback">Please upload an image.</div>
+                                                    <div v-if="formErrors.image" class="invalid-feedback">{{ formErrors.image }}</div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- end row -->
                                 </div>
-                                <!-- end form-content -->
                             </div>
-                            <!-- end form-box -->
                         </div>
-                        <!-- end col-lg-12 -->
                     </div>
-                    <!-- end row -->
+
+                    <!-- Submit Button -->
                     <div class="row">
                         <div class="btn-box pt-3">
                             <button type="submit" class="theme-btn">
-                                Submit Listing <i class="la la-arrow-right ms-1"></i>
+                                Update Destination <i class="la la-arrow-right ms-1"></i>
                             </button>
                         </div>
                     </div>
-                    <!-- end row -->
                 </form>
-                <div class="border-top mt-5"></div>
-                <Footer></Footer>
-                <!-- end row -->
             </div>
-            <!-- end dashboard-main-content -->
         </div>
     </div>
 </template>
 
-
 <script setup lang="ts">
 import axios from 'axios';
-import { useRouter } from 'vue-router';
-import { ref } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+import { ref, onMounted } from 'vue';
 
 const router = useRouter();
+const route = useRoute();
 
 const form = ref({
     name: '',
     description: '',
     landmark: '',
-    price:'',
+    price: '',
     status: 'Active'
 });
 
 let file: File | null = null;
+let destinationId: string | null = null;
+
+// Object to hold form validation errors
+const formErrors = ref({
+    name: '',
+    description: '',
+    landmark: '',
+    price: '',
+    status: '',
+    image: ''
+});
 
 const handleFileUpload = (event: Event) => {
     const target = event.target as HTMLInputElement;
@@ -191,7 +184,8 @@ const submitForm = async () => {
             formData.append('image', file);
         }
 
-        const response = await axios.post('/api/admin/destinations', formData, {
+        // Log formData to verify its contents
+        const response = await axios.put(`/api/admin/destinations/${destinationId}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -201,26 +195,52 @@ const submitForm = async () => {
             router.push({ path: '/admin/destinations' });
         }
 
-        resetForm();
+        // resetForm();
     } catch (error) {
-        console.error('Error creating destination:', error);
+        // Handle errors
+        console.error('Error updating destination:', error);
     }
 };
+
 
 const resetForm = () => {
     form.value.name = '';
     form.value.description = '';
     form.value.landmark = '';
-    form.value.price = '';
     form.value.status = 'Active';
     file = null;
+    formErrors.value = {
+        name: '',
+        description: '',
+        landmark: '',
+        price: '',
+        status: '',
+        image: ''
+    };
 };
+
+onMounted(async () => {
+    try {
+        const response = await axios.get(`/api/admin/destinations/${route.params.id}`);
+        const destination = response.data.destination;
+
+        form.value.name = destination.name;
+        form.value.description = destination.description;
+        form.value.landmark = destination.landmark;
+        form.value.price = destination.price;
+        form.value.status = destination.status;
+        // Optionally set other fields here
+
+        destinationId = route.params.id;
+    } catch (error) {
+        console.error('Error fetching destination details:', error);
+    }
+});
 </script>
 
-
 <style scoped>
-.form-select{
-    height:50px;
+.form-select {
+    height: 50px;
     line-height: inherit;
     padding: 10px 20px 10px 40px;
     font-size: 13px;

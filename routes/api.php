@@ -17,6 +17,11 @@ use Illuminate\Support\Facades\Route;
     Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
         return $request->user();
     });
+
 Route::prefix('admin')->group(function () {
-    Route::resource('destinations', \App\Http\Controllers\Admin\DestinationController::class);
+    Route::apiResource('destinations', \App\Http\Controllers\Admin\DestinationController::class);
+});
+
+Route::prefix('guest')->group(function () {
+    Route::get('destinations', [\App\Http\Controllers\GuestController::class, 'destinations']);
 });

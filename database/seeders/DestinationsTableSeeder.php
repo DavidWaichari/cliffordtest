@@ -19,25 +19,25 @@ class DestinationsTableSeeder extends Seeder
                 'name' => 'Eiffel Tower',
                 'description' => 'Famous landmark in Paris',
                 'landmark' => 'Eiffel Tower',
-                'status' => 'Open',
+                'status' => 'Active',
             ],
             [
                 'name' => 'Statue of Liberty',
                 'description' => 'Iconic statue in New York',
                 'landmark' => 'Statue of Liberty',
-                'status' => 'Open',
+                'status' => 'Active',
             ],
             [
                 'name' => 'Great Wall of China',
                 'description' => 'Ancient wall in China',
                 'landmark' => 'Great Wall',
-                'status' => 'Open',
+                'status' => 'Active',
             ],
             [
                 'name' => 'Sydney Opera House',
                 'description' => 'Famous opera house in Sydney',
                 'landmark' => 'Opera House',
-                'status' => 'Open',
+                'status' => 'Active',
             ],
         ];
 

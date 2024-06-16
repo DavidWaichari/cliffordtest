@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,13 +8,22 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Destination extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia;
+use HasFactory, InteractsWithMedia;
 
-    protected $fillable = [
-       'name',
-        'description',
-        'landmark',
-        'status',
-        'extras',
-    ];
+protected $fillable = [
+'name',
+'description',
+'landmark',
+    'price',
+'status',
+'extras',
+];
+
+protected $appends = ['media_url'];
+
+public function getMediaUrlAttribute()
+{
+$media = $this->getFirstMedia('images');
+return $media ? $media->getUrl() : null;
+}
 }
