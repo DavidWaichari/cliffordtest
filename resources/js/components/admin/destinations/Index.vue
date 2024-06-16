@@ -54,7 +54,7 @@
 
                                 <EasyDataTable
                                     :headers="headers"
-                                    :items="items"
+                                    :items="filteredDestinations"
                                     :search-field="searchField"
                                     :search-value="searchValue"
                                 >
@@ -111,31 +111,52 @@
     </div>
 </template>
 
-<script lang="ts" setup>
-import { ref } from "vue";
-import type { Header, Item } from "vue3-easy-data-table";
+<script setup lang="ts">
+import { ref, watchEffect, onMounted } from 'vue';
+import axios from 'axios';
+import { useRouter } from 'vue-router';
+import { Header, Item } from 'vue3-easy-data-table';
 
-const searchField = ["name", "description", "landmark"];
+const searchField = ['name', 'description', 'landmark'];
 const searchValue = ref('');
 
 const headers: Header[] = [
-    { text: "NAME", value: "name" },
-    { text: "DESCRIPTION", value: "description"},
-    { text: "LANDMARK", value: "landmark"},
-    { text: "STATUS", value: "status", sortable: true},
-    { text: "DETAILS", value: "details"},
+    { text: 'NAME', value: 'name' },
+    { text: 'DESCRIPTION', value: 'description' },
+    { text: 'LANDMARK', value: 'landmark' },
+    { text: 'STATUS', value: 'status', sortable: true },
+    { text: 'DETAILS', value: 'details' },
 ];
 
-const items: Item[] = [
-    { "name": "Eiffel Tower", "description": "Famous landmark in Paris", "landmark": "Eiffel Tower", "status": "Open"},
-    { "name": "Statue of Liberty", "description": "Iconic statue in New York", "landmark": "Statue of Liberty", "status": "Open"},
-    { "name": "Great Wall of China", "description": "Ancient wall in China", "landmark": "Great Wall", "status": "Open"},
-    { "name": "Sydney Opera House", "description": "Famous opera house in Sydney", "landmark": "Opera House", "status": "Open"},
-];
+const items: Item[] = ref([]);
+
+const filteredDestinations = ref<Item[]>([]);
 
 const viewDetails = (item: Item) => {
     alert(`Viewing details for: ${item.name}`);
 };
+
+onMounted(async () => {
+    try {
+        const response = await axios.get('/api/admin/destinations');
+        items.value = response.data.destinations; // Update reactive reference
+        filteredDestinations.value = [...items.value]; // Initially, display all destinations
+    } catch (error) {
+        console.error('Error fetching destinations:', error);
+    }
+});
+
+watchEffect(() => {
+    if (!searchValue.value.trim()) {
+        filteredDestinations.value = [...items.value]; // Reset to display all destinations when search input is empty
+    } else {
+        filteredDestinations.value = items.value.filter((item) =>
+            searchField.some((field) =>
+                item[field]?.toLowerCase().includes(searchValue.value.trim().toLowerCase())
+            )
+        );
+    }
+});
 </script>
 
 <style scoped>

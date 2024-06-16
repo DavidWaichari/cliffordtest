@@ -368,7 +368,7 @@
                                 to="/admin/flights"
                                 :class="{ 'router-link-exact-active': $route.fullPath.startsWith('/admin/flights') }"
                             >
-                                <i class="la la-list me-2 text-color-2"></i>Flights
+                                <i class="la la-plane me-2 text-color-2"></i>Flights
                             </router-link>
                         </li>
 
@@ -378,7 +378,7 @@
                         </li>
                         <li>
                             <router-link to="/"
-                            ><i class="la la-plane me-2 text-color-4"></i>Visa
+                            ><i class="la la-list me-2 text-color-4"></i>Visa
                                 Application</router-link
                             >
                         </li>
@@ -835,5 +835,4 @@
         </div>
         <!-- end scroll top -->
     </div>
-
 </template>
