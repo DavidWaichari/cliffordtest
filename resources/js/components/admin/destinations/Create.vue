@@ -7,7 +7,7 @@
                         <div class="breadcrumb-content  ">
                             <div class="section-heading  ">
                                 <h2 class="sec__title font-size-30 text-white  ">
-                                    Flights
+                                    Destinations
                                 </h2>
                             </div>
                         </div>
@@ -19,7 +19,7 @@
                             <ul class="list-items  ">
                                 <li><a href="index.html" class="text-white  ">Home</a></li>
                                 <li>Dashboard</li>
-                                <li>Flights</li>
+                                <li>Add Destination</li>
                             </ul>
                         </div>
                         <!-- end breadcrumb-list -->
@@ -531,3 +531,4 @@
     color: #0d233e;
 }
 </style>
+

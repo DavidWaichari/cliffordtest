@@ -5,6 +5,9 @@ import AdminDashboard from './components/admin/Dashboard.vue';
 import BookingsIndex from './components/admin/bookings/Index.vue';
 import FlightIndex from './components/admin/flights/Index.vue';
 import FlightCreate from './components/admin/flights/Create.vue';
+import Destinations from './components/admin/destinations/Index.vue';
+import DestinationsCreate from './components/admin/destinations/Create.vue';
+
 
 
 
@@ -37,6 +40,14 @@ const routes = [
                 path:'flights/create',
                 component:FlightCreate
             },
+            {
+                path:'destinations',
+                component: Destinations
+            },
+            {
+                path:'destinations/create',
+                component: DestinationsCreate
+            }
 
         ]
     }

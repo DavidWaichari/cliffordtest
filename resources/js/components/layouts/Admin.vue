@@ -346,7 +346,7 @@
                             <img src="/trizen-demo/html/images/team9.jpg" alt="testimonial image" />
                         </div>
                         <div class="author-bio">
-                            <h4 class="author__title">Royel travel agency</h4>
+                            <h4 class="author__title">DaveTravels</h4>
                             <span class="author__meta">Welcome to Admin Panel</span>
                         </div>
                     </div>
@@ -373,16 +373,8 @@
                         </li>
 
                         <li>
-                            <a href="admin-dashboard-travellers.html"
-                            ><i class="la la-users me-2 text-color-3"></i>Travellers</a
+                            <router-link to="/admin/destinations" :class="{ 'router-link-exact-active': $route.fullPath.startsWith('/admin/destinations') }"><i class="la la-users me-2 text-color-3"></i>Destinations</router-link
                             >
-                            <ul class="toggle-drop-menu">
-                                <li>
-                                    <a href="admin-dashboard-traveler-detail.html"
-                                    >Traveller Details</a
-                                    >
-                                </li>
-                            </ul>
                         </li>
                         <li>
                             <router-link to="/"

@@ -58,10 +58,10 @@
 <script src="/trizen-demo/html/js/animated-headline.js"></script>
 <script src="/trizen-demo/html/js/jquery.sparkline.js"></script>
 <script src="/trizen-demo/html/js/dashboard.js"></script>
-<script src="/trizen-demo/html/js/chart.js"></script>
-<script src="/trizen-demo/html/js/chart.extension.js"></script>
-<script src="/trizen-demo/html/js/bar-chart.js"></script>
-<script src="/trizen-demo/html/js/line-chart.js"></script>
+{{--<script src="/trizen-demo/html/js/chart.js"></script>--}}
+{{--<script src="/trizen-demo/html/js/chart.extension.js"></script>--}}
+{{--<script src="/trizen-demo/html/js/bar-chart.js"></script>--}}
+{{--<script src="/trizen-demo/html/js/line-chart.js"></script>--}}
 <script src="/trizen-demo/html/js/jquery.ripples-min.js"></script>
 <script src="/trizen-demo/html/js/main.js"></script>
 </body>
