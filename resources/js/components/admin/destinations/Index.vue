@@ -44,10 +44,10 @@
                                 </router-link>
                             </div>
                             <div class="form-content">
-                                <div class="col-lg-4 responsive-column  ">
-                                    <div class="input-box  ">
-                                        <div class="form-group  ">
-                                            <input class="form-control" type="text" name="text" placeholder="Search...  " v-model="searchValue">
+                                <div class="col-lg-4 responsive-column">
+                                    <div class="input-box">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" name="text" placeholder="Search..." v-model="searchValue">
                                         </div>
                                     </div>
                                 </div>
@@ -57,7 +57,11 @@
                                     :items="items"
                                     :search-field="searchField"
                                     :search-value="searchValue"
-                                />
+                                >
+                                    <template #item-details="item">
+                                        <a @click.prevent="viewDetails(item)" href="#" class="theme-btn theme-btn-small me-2" data-bs-toggle="tooltip" data-placement="top" aria-label="View details" data-bs-original-title="View details"><i class="la la-eye"></i></a>
+                                    </template>
+                                </EasyDataTable>
                             </div>
                         </div>
                         <!-- end form-box -->
@@ -70,7 +74,7 @@
                     <div class="col-lg-7">
                         <div class="copy-right padding-top-30px">
                             <p class="copy__desc">
-                                © Copyright Trizen <span id="get-year">2024</span> . Made
+                                © Copyright Trizen <span id="get-year">2024</span>. Made
                                 with <span class="la la-heart"></span> by
                                 <a href="https://themeforest.net/user/techydevs/portfolio">TechyDevs</a>
                             </p>
@@ -111,25 +115,39 @@
 import { ref } from "vue";
 import type { Header, Item } from "vue3-easy-data-table";
 
-const searchField = ["number", "weight","player"];
+const searchField = ["name", "description", "landmark"];
 const searchValue = ref('');
 
 const headers: Header[] = [
-    { text: "PLAYER", value: "player" },
-    { text: "TEAM", value: "team"},
-    { text: "NUMBER", value: "number"},
-    { text: "POSITION", value: "position"},
-    { text: "HEIGHT", value: "height"},
-    { text: "WEIGHT (lbs)", value: "weight", sortable: true},
-    { text: "LAST ATTENDED", value: "lastAttended"},
-    { text: "COUNTRY", value: "country"},
+    { text: "NAME", value: "name" },
+    { text: "DESCRIPTION", value: "description"},
+    { text: "LANDMARK", value: "landmark"},
+    { text: "STATUS", value: "status", sortable: true},
+    { text: "DETAILS", value: "details"},
 ];
 
 const items: Item[] = [
-    { "player": "Stephen Curry", "team": "GSW", "number": 30, "position": 'G', "height": '6-2', "weight": 185, "lastAttended": "Davidson", "country": "USA"},
-    { "player": "Lebron James", "team": "LAL", "number": 6, "position": 'F', "height": '6-9', "weight": 250, "lastAttended": "St. Vincent-St. Mary HS (OH)", "country": "USA"},
-    { "player": "Kevin Durant", "team": "BKN", "number": 7, "position": 'F', "height": '6-10', "weight": 240, "lastAttended": "Texas-Austin", "country": "USA"},
-    { "player": "Giannis Antetokounmpo", "team": "MIL", "number": 34, "position": 'F', "height": '6-11', "weight": 242, "lastAttended": "Filathlitikos", "country": "Greece"},
+    { "name": "Eiffel Tower", "description": "Famous landmark in Paris", "landmark": "Eiffel Tower", "status": "Open"},
+    { "name": "Statue of Liberty", "description": "Iconic statue in New York", "landmark": "Statue of Liberty", "status": "Open"},
+    { "name": "Great Wall of China", "description": "Ancient wall in China", "landmark": "Great Wall", "status": "Open"},
+    { "name": "Sydney Opera House", "description": "Famous opera house in Sydney", "landmark": "Opera House", "status": "Open"},
 ];
+
+const viewDetails = (item: Item) => {
+    alert(`Viewing details for: ${item.name}`);
+};
 </script>
 
+<style scoped>
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+button:hover {
+    background-color: #0056b3;
+}
+</style>
