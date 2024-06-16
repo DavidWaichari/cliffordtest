@@ -7,6 +7,8 @@
 import './bootstrap';
 import { createApp } from 'vue';
 import router from './router'; // Import the router
+import Vue3EasyDataTable from 'vue3-easy-data-table';
+import 'vue3-easy-data-table/dist/style.css';
 
 
 /**
@@ -19,6 +21,7 @@ const app = createApp({});
 
 import ExampleComponent from './components/ExampleComponent.vue';
 app.component('example-component', ExampleComponent);
+app.component('EasyDataTable', Vue3EasyDataTable);
 
 /**
  * The following block of code may be used to automatically register your

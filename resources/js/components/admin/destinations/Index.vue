@@ -11,7 +11,9 @@
                                 </h2>
                             </div>
                         </div>
+                        <!-- end breadcrumb-content -->
                     </div>
+                    <!-- end col-lg-6 -->
                     <div class="col-lg-6">
                         <div class="breadcrumb-list text-end">
                             <ul class="list-items">
@@ -20,10 +22,14 @@
                                 <li>Destinations</li>
                             </ul>
                         </div>
+                        <!-- end breadcrumb-list -->
                     </div>
+                    <!-- end col-lg-6 -->
                 </div>
+                <!-- end row -->
             </div>
         </div>
+        <!-- end dashboard-bread -->
         <div class="dashboard-main-content">
             <div class="container-fluid">
                 <div class="row">
@@ -32,63 +38,33 @@
                             <div class="form-title-wrap d-flex justify-content-between align-items-center">
                                 <div>
                                     <h3 class="title">Destinations List</h3>
-                                    <p class="font-size-14">Showing 1 to 10 of 20 entries</p>
                                 </div>
                                 <router-link to="/admin/destinations/create" type="submit" class="theme-btn">
                                     Add Destination <i class="la la-arrow-right ms-1"></i>
                                 </router-link>
                             </div>
                             <div class="form-content">
-                                <div class="table-form table-responsive">
-                                    <vue3-datatable
-                                        :rows="rows"
-                                        :columns="cols"
-                                        :loading="loading"
-                                        :totalRows="total_rows"
-                                        :isServerMode="true"
-                                        :pageSize="params.pagesize"
-                                        rowClass="cursor-pointer"
-                                        @change="changeServer"
-                                        @rowClick="rowClick"
-                                    >
-                                        <template #id="data">
-                                            <strong>#{{ data.value.id }}</strong>
-                                        </template>
-                                    </vue3-datatable>
+                                <div class="col-lg-4 responsive-column  ">
+                                    <div class="input-box  ">
+                                        <div class="form-group  ">
+                                            <input class="form-control" type="text" name="text" placeholder="Search...  " v-model="searchValue">
+                                        </div>
+                                    </div>
                                 </div>
+
+                                <EasyDataTable
+                                    :headers="headers"
+                                    :items="items"
+                                    :search-field="searchField"
+                                    :search-value="searchValue"
+                                />
                             </div>
                         </div>
+                        <!-- end form-box -->
                     </div>
+                    <!-- end col-lg-12 -->
                 </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link page-link-nav" href="#" aria-label="Previous">
-                                        <span aria-hidden="true"><i class="la la-angle-left"></i></span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link page-link-nav" href="#">1</a>
-                                </li>
-                                <li class="page-item active">
-                                    <a class="page-link page-link-nav" href="#">2 <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link page-link-nav" href="#">3</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link page-link-nav" href="#" aria-label="Next">
-                                        <span aria-hidden="true"><i class="la la-angle-right"></i></span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
+                <!-- end row -->
                 <div class="border-top mt-5"></div>
                 <div class="row align-items-center">
                     <div class="col-lg-7">
@@ -99,7 +75,9 @@
                                 <a href="https://themeforest.net/user/techydevs/portfolio">TechyDevs</a>
                             </p>
                         </div>
+                        <!-- end copy-right -->
                     </div>
+                    <!-- end col-lg-7 -->
                     <div class="col-lg-5">
                         <div class="copy-right-content text-end padding-top-30px">
                             <ul class="social-profile">
@@ -117,82 +95,41 @@
                                 </li>
                             </ul>
                         </div>
+                        <!-- end copy-right-content -->
                     </div>
+                    <!-- end col-lg-5 -->
                 </div>
+                <!-- end row -->
             </div>
+            <!-- end container-fluid -->
         </div>
+        <!-- end dashboard-main-content -->
     </div>
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted, reactive } from 'vue';
-import Vue3Datatable from '@bhplugin/vue3-datatable';
-import '@bhplugin/vue3-datatable/dist/style.css';
+<script lang="ts" setup>
+import { ref } from "vue";
+import type { Header, Item } from "vue3-easy-data-table";
 
-const loading = ref(true);
-const total_rows = ref(0);
+const searchField = ["number", "weight","player"];
+const searchValue = ref('');
 
-const params = reactive({ current_page: 1, pagesize: 10 });
+const headers: Header[] = [
+    { text: "PLAYER", value: "player" },
+    { text: "TEAM", value: "team"},
+    { text: "NUMBER", value: "number"},
+    { text: "POSITION", value: "position"},
+    { text: "HEIGHT", value: "height"},
+    { text: "WEIGHT (lbs)", value: "weight", sortable: true},
+    { text: "LAST ATTENDED", value: "lastAttended"},
+    { text: "COUNTRY", value: "country"},
+];
 
-const rows = ref([
-    {
-        id: 1,
-        name: 'Central Park',
-        description: 'A large public park in New York City.',
-        landmark: 'Statue of Liberty',
-        status: 'Open'
-    },
-    {
-        id: 2,
-        name: 'Eiffel Tower',
-        description: 'An iconic iron lattice tower in Paris.',
-        landmark: 'Louvre Museum',
-        status: 'Open'
-    },
-    {
-        id: 3,
-        name: 'Great Wall of China',
-        description: 'A series of fortifications made of stone.',
-        landmark: 'Beijing',
-        status: 'Open'
-    },
-    {
-        id: 4,
-        name: 'Pyramids of Giza',
-        description: 'Ancient pyramid structures in Egypt.',
-        landmark: 'Cairo',
-        status: 'Open'
-    },
-    {
-        id: 5,
-        name: 'Sydney Opera House',
-        description: 'A multi-venue performing arts centre in Sydney.',
-        landmark: 'Sydney Harbour Bridge',
-        status: 'Open'
-    }
-]);
-
-const cols = ref([
-    { field: 'id', title: 'ID', isUnique: true, type: 'number' },
-    { field: 'name', title: 'Name' },
-    { field: 'description', title: 'Description' },
-    { field: 'landmark', title: 'Landmark' },
-    { field: 'status', title: 'Status' }
-]) || [];
-
-onMounted(() => {
-    total_rows.value = rows.value.length;
-    loading.value = false;
-});
-
-const changeServer = (data: any) => {
-    params.current_page = data.current_page;
-    params.pagesize = data.pagesize;
-
-    // No actual data fetching, but you can simulate pagination or other server-side logic here if needed
-};
-
-const rowClick = (place: any) => {
-    alert('Place Details \n' + place.id + ', ' + place.name + ', ' + place.description + ', ' + place.landmark + ', ' + place.status);
-};
+const items: Item[] = [
+    { "player": "Stephen Curry", "team": "GSW", "number": 30, "position": 'G', "height": '6-2', "weight": 185, "lastAttended": "Davidson", "country": "USA"},
+    { "player": "Lebron James", "team": "LAL", "number": 6, "position": 'F', "height": '6-9', "weight": 250, "lastAttended": "St. Vincent-St. Mary HS (OH)", "country": "USA"},
+    { "player": "Kevin Durant", "team": "BKN", "number": 7, "position": 'F', "height": '6-10', "weight": 240, "lastAttended": "Texas-Austin", "country": "USA"},
+    { "player": "Giannis Antetokounmpo", "team": "MIL", "number": 34, "position": 'F', "height": '6-11', "weight": 242, "lastAttended": "Filathlitikos", "country": "Greece"},
+];
 </script>
+
