@@ -382,58 +382,18 @@
                             <router-link to="/admin/destinations" :class="{ 'router-link-exact-active': $route.fullPath.startsWith('/admin/destinations') }"><i class="la la-users me-2 text-color-3"></i>Destinations</router-link
                             >
                         </li>
-
                         <li>
-                            <a href="admin-dashboard-reviews.html"
-                            ><i class="la la-star me-2 text-color-5"></i>Reviews</a
+                            <router-link to="/admin/airlines" :class="{ 'router-link-exact-active': $route.fullPath.startsWith('/admin/airlines') }"
+                            ><i class="la la-heart me-2 text-color-6"></i>Airlines</router-link
                             >
                         </li>
                         <li>
-                            <a href="admin-dashboard-wishlist.html"
-                            ><i class="la la-heart me-2 text-color-6"></i>Wishlist</a
-                            >
-                        </li>
-                        <li>
-                            <a href="admin-dashboard-travel-agents.html"
-                            ><i class="la la-text-width me-2 text-color-7"></i>Travel
-                                Agents</a
-                            >
-                        </li>
-                        <li>
-              <span class="side-menu-icon toggle-menu-icon">
-                <i class="la la-angle-down"></i>
-              </span>
                             <a href="#"
-                            ><i class="la la-area-chart me-2 text-color-8"></i>Finance</a
-                            >
-                            <ul class="toggle-drop-menu">
-                                <li><a href="admin-invoice.html">Invoice</a></li>
-                                <li><a href="admin-payments.html">Payments</a></li>
-                                <li><a href="admin-currency-list.html">Currency List</a></li>
-                                <li>
-                                    <a href="admin-dashboard-subscribers.html">Subscribers</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-              <span class="side-menu-icon toggle-menu-icon">
-                <i class="la la-angle-down"></i>
-              </span>
-                            <a href="#"
-                            ><i class="la la-map-signs me-2 text-color-9"></i>Locations</a
-                            >
-                            <ul class="toggle-drop-menu">
-                                <li><a href="admin-countries.html">Countries</a></li>
-                                <li><a href="admin-airlines.html">Airlines</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="admin-dashboard-settings.html"
                             ><i class="la la-cog me-2 text-color-10"></i>Settings</a
                             >
                         </li>
                         <li>
-                            <a href="index.html"
+                            <a href="#"
                             ><i class="la la-power-off me-2 text-color-11"></i>Logout</a
                             >
                         </li>

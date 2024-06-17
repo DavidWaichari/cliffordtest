@@ -186,7 +186,7 @@ const submitForm = async () => {
     height: 50px;
     line-height: inherit;
     padding: 10px 20px 10px 40px;
-    font-size: 13px;
+    font-size: 16px;
     color: #0d233e;
 }
 </style>

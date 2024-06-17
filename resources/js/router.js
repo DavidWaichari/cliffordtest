@@ -10,6 +10,9 @@ import DestinationsEdit from './components/admin/destinations/Edit.vue';
 import DestinationClasses from './components/admin/destination_classes/Index.vue';
 import DestinationsClassesCreate from './components/admin/destination_classes/Create.vue';
 import DestinationsClassesEdit from './components/admin/destination_classes/Edit.vue';
+import AirlinesIndex from './components/admin/airlines/Index.vue';
+import AirlinesCreate from './components/admin/airlines/Create.vue';
+import AirlinesEdit from './components/admin/airlines/Edit.vue';
 
 //user
 import UserLayout from './components/layouts/User.vue'
@@ -76,7 +79,19 @@ const routes = [
             {
                 path:'destination_classes/:id/edit',
                 component: DestinationsClassesEdit
-            }
+            },
+            {
+                path:'airlines',
+                component: AirlinesIndex
+            },
+            {
+                path:'airlines/create',
+                component: AirlinesCreate
+            },
+            {
+                path:'airlines/:id/edit',
+                component: AirlinesEdit
+            },
 
         ]
     }

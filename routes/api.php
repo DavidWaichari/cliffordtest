@@ -11,6 +11,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('admin')->group(function () {
     Route::apiResource('/destinations', \App\Http\Controllers\Admin\DestinationController::class);
     Route::apiResource('/destination_classes',\App\Http\Controllers\Admin\DestinationClassController::class);
+    Route::apiResource('/airlines',\App\Http\Controllers\Admin\AirlineController::class);
 });
 
 Route::prefix('guest')->group(function () {

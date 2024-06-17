@@ -7,7 +7,7 @@
                         <div class="breadcrumb-content">
                             <div class="section-heading">
                                 <h2 class="sec__title font-size-30 text-white">
-                                    Destination Classes
+                                    Airlines
                                 </h2>
                             </div>
                         </div>
@@ -19,7 +19,7 @@
                             <ul class="list-items">
                                 <li><a href="index.html" class="text-white">Home</a></li>
                                 <li>Dashboard</li>
-                                <li>Add Destination Class</li>
+                                <li>Add Airline</li>
                             </ul>
                         </div>
                         <!-- end breadcrumb-list -->
@@ -38,63 +38,48 @@
                             <div class="form-box">
                                 <div class="form-title-wrap">
                                     <h3 class="title">
-                                        <i class="la la-gear me-2 text-gray"></i>Add destination class information for your flights
+                                        <i class="la la-gear me-2 text-gray"></i>Add airline information for your flights
                                     </h3>
                                 </div>
                                 <!-- form-title-wrap -->
                                 <div class="form-content contact-form-action">
                                     <div class="row">
                                         <div class="col-lg-6">
-                                            <!-- Status Select -->
-                                            <div class="input-box">
-                                                <label class="label-text">Destination</label>
-                                                <div class="form-group w-100">
-                                                    <select class="form-select" v-model="form.destination_id" required name="destination_id">
-                                                        <option :value="destination.id" v-for="destination in destinations">
-                                                            {{ destination.name }}</option>
-                                                    </select>
-                                                    <div class="invalid-feedback">Please select a destination class.</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
                                             <!-- Place Name Input -->
                                             <div class="input-box">
                                                 <label class="label-text">
-                                                   Name
+                                                    Airline Name
                                                 </label>
                                                 <div class="form-group">
                                                     <span class="la la-briefcase form-icon"></span>
-                                                    <select class="form-select" v-model="form.name" required name="name">
-                                                        <option value="First Class">First Class</option>
-                                                        <option value="Business">Business</option>
-                                                        <option value="Economy">Economy</option>
-                                                    </select>
-                                                    <div class="invalid-feedback">Please provide a destination class name.</div>
+                                                    <input class="form-control" type="text" placeholder="Airline name" v-model="form.name" required name="name">
+                                                    <div class="invalid-feedback">Please provide a an airline name.</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <!-- Description Textarea -->
+                                            <div class="input-box">
+                                                <label class="label-text">
+                                                    Description
+                                                </label>
+                                                <div class="form-group">
+                                                    <span class="la la-briefcase form-icon"></span>
+                                                    <textarea class="form-control" name="description" placeholder="Airline description" v-model="form.description" required></textarea>
+                                                    <div class="invalid-feedback">Please provide the airline description.</div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="input-box">
                                                 <label class="label-text">
-                                                    Price
+                                                    Capacity
                                                 </label>
                                                 <div class="form-group">
                                                     <span class="la la-money form-icon"></span>
-                                                    <input class="form-control" name="price" type="number" min="0" step=".01" placeholder="price" v-model="form.price" required>
-                                                    <div class="invalid-feedback">Please provide a the price.</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="input-box">
-                                                <label class="label-text">
-                                                    Current Price
-                                                </label>
-                                                <div class="form-group">
-                                                    <span class="la la-money form-icon"></span>
-                                                    <input class="form-control" name="current_price" type="number" min="0" step=".01" placeholder="current price" v-model="form.current_price" required>
-                                                    <div class="invalid-feedback">Please provide a the current price.</div>
+                                                    <input class="form-control" name="capacity" type="number" min="0" step="1" placeholder="capacity" v-model="form.capacity" required>
+                                                    <div class="invalid-feedback">Please provide the capacity.</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -143,36 +128,25 @@
 <script setup lang="ts">
 import axios from 'axios';
 import { useRouter } from 'vue-router';
-import {onMounted, ref} from 'vue';
+import { ref } from 'vue';
 
 const router = useRouter();
 
 const form = ref({
     name: '',
-    destination_id: '',
-    price:'',
-    current_price:'',
+    description: '',
+    capacity:'',
     status: 'Active'
 });
 
-const destinations = ref([]);
 
-onMounted(async () => {
-    try {
-        const response = await axios.get('/api/admin/destinations');
-        destinations.value = response.data.destinations; // Update reactive reference
-    } catch (error) {
-        console.error('Error fetching destinations:', error);
-    }
-});
 
 const submitForm = async () => {
     try {
-        const response = await axios.post('/api/admin/destination_classes', form.value, {
-        });
+        const response = await axios.post('/api/admin/airlines', form.value);
 
         if (response.data.success) {
-            router.push({ path: '/admin/destination_classes' });
+            router.push({ path: '/admin/airlines' });
         }
 
         resetForm();
@@ -183,9 +157,8 @@ const submitForm = async () => {
 
 const resetForm = () => {
     form.value.name = '';
-    form.value.destination_id = '';
-    form.value.price = '';
-    form.value.current_price = '';
+    form.value.description = '';
+    form.value.capacity = '';
     form.value.status = 'Active';
 };
 </script>
