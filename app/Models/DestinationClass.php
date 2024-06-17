@@ -17,7 +17,6 @@ class DestinationClass extends Model
     protected $fillable = [
         'name',
         'price',
-        'current_price',
         'destination_id',
         'status',
         'extras'

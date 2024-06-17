@@ -1,19 +1,16 @@
 <template>
     <div class="dashboard-content-wrap">
+        <!-- Breadcrumb section -->
         <div class="dashboard-bread dashboard--bread dashboard-bread-2">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-lg-6">
                         <div class="breadcrumb-content">
                             <div class="section-heading">
-                                <h2 class="sec__title font-size-30 text-white">
-                                    Flights
-                                </h2>
+                                <h2 class="sec__title font-size-30 text-white">Flights</h2>
                             </div>
                         </div>
-                        <!-- end breadcrumb-content -->
                     </div>
-                    <!-- end col-lg-6 -->
                     <div class="col-lg-6">
                         <div class="breadcrumb-list text-end">
                             <ul class="list-items">
@@ -22,14 +19,12 @@
                                 <li>Flights</li>
                             </ul>
                         </div>
-                        <!-- end breadcrumb-list -->
                     </div>
-                    <!-- end col-lg-6 -->
                 </div>
-                <!-- end row -->
             </div>
         </div>
-        <!-- end dashboard-bread -->
+
+        <!-- Main content -->
         <div class="dashboard-main-content">
             <div class="container-fluid">
                 <div class="row">
@@ -37,305 +32,154 @@
                         <div class="form-box">
                             <div class="form-title-wrap d-flex justify-content-between align-items-center">
                                 <div>
-                                    <h3 class="title">Flights Lists</h3>
-                                    <p class="font-size-14">Showing 1 to 10 of 20 entries</p>
+                                    <h3 class="title">Flights List</h3>
                                 </div>
                                 <router-link to="/admin/flights/create" type="submit" class="theme-btn">
-                                    Submit Listing <i class="la la-arrow-right ms-1"></i>
+                                    Add Flight <i class="la la-arrow-right ms-1"></i>
                                 </router-link>
                             </div>
+
                             <div class="form-content">
-                                <div class="table-form table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">No</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Country</th>
-                                            <th scope="col">City</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>
-                                                <div class="table-content">
-                                                    <h3 class="title">Alex Smith</h3>
-                                                </div>
-                                            </td>
-                                            <td>alexsmith@gmail.com</td>
-                                            <td>United States</td>
-                                            <td>New York</td>
-                                            <td>
-                                                <span class="badge text-bg-success py-1 px-2">Active</span>
-                                            </td>
-                                            <td>
-                                                <div class="table-content">
-                                                    <a href="admin-dashboard-traveler-detail.html" class="theme-btn theme-btn-small me-2" data-bs-toggle="tooltip" data-placement="top" aria-label="View" data-bs-original-title="View"><i class="la la-eye"></i></a>
-                                                    <a href="#" class="theme-btn theme-btn-small" data-bs-toggle="tooltip" data-placement="top" aria-label="Edit" data-bs-original-title="Edit"><i class="la la-edit"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>
-                                                <div class="table-content">
-                                                    <h3 class="title">David Matin</h3>
-                                                </div>
-                                            </td>
-                                            <td>davidmartin@gmail.com</td>
-                                            <td>United States</td>
-                                            <td>New York</td>
-                                            <td>
-                                                <span class="badge text-bg-warning text-white py-1 px-2">InActive</span>
-                                            </td>
-                                            <td>
-                                                <div class="table-content">
-                                                    <a href="admin-dashboard-traveler-detail.html" class="theme-btn theme-btn-small me-2" data-bs-toggle="tooltip" data-placement="top" aria-label="View" data-bs-original-title="View"><i class="la la-eye"></i></a>
-                                                    <a href="#" class="theme-btn theme-btn-small" data-bs-toggle="tooltip" data-placement="top" aria-label="Edit" data-bs-original-title="Edit"><i class="la la-edit"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>
-                                                <div class="table-content">
-                                                    <h3 class="title">Mark Hardson</h3>
-                                                </div>
-                                            </td>
-                                            <td>markhardson@gmail.com</td>
-                                            <td>United States</td>
-                                            <td>New York</td>
-                                            <td>
-                                                <span class="badge text-bg-success py-1 px-2">Active</span>
-                                            </td>
-                                            <td>
-                                                <div class="table-content">
-                                                    <a href="admin-dashboard-traveler-detail.html" class="theme-btn theme-btn-small me-2" data-bs-toggle="tooltip" data-placement="top" aria-label="View" data-bs-original-title="View"><i class="la la-eye"></i></a>
-                                                    <a href="#" class="theme-btn theme-btn-small" data-bs-toggle="tooltip" data-placement="top" aria-label="Edit" data-bs-original-title="Edit"><i class="la la-edit"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">4</th>
-                                            <td>
-                                                <div class="table-content">
-                                                    <h3 class="title">John Doe</h3>
-                                                </div>
-                                            </td>
-                                            <td>johndoe@gmail.com</td>
-                                            <td>United States</td>
-                                            <td>New York</td>
-                                            <td>
-                                                <span class="badge text-bg-success py-1 px-2">Active</span>
-                                            </td>
-                                            <td>
-                                                <div class="table-content">
-                                                    <a href="admin-dashboard-traveler-detail.html" class="theme-btn theme-btn-small me-2" data-bs-toggle="tooltip" data-placement="top" aria-label="View" data-bs-original-title="View"><i class="la la-eye"></i></a>
-                                                    <a href="#" class="theme-btn theme-btn-small" data-bs-toggle="tooltip" data-placement="top" aria-label="Edit" data-bs-original-title="Edit"><i class="la la-edit"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">5</th>
-                                            <td>
-                                                <div class="table-content">
-                                                    <h3 class="title">Josh Purdila</h3>
-                                                </div>
-                                            </td>
-                                            <td>joshpurdila@gmail.com</td>
-                                            <td>United States</td>
-                                            <td>New York</td>
-                                            <td>
-                                                <span class="badge text-bg-success py-1 px-2">Active</span>
-                                            </td>
-                                            <td>
-                                                <div class="table-content">
-                                                    <a href="admin-dashboard-traveler-detail.html" class="theme-btn theme-btn-small me-2" data-bs-toggle="tooltip" data-placement="top" aria-label="View" data-bs-original-title="View"><i class="la la-eye"></i></a>
-                                                    <a href="#" class="theme-btn theme-btn-small" data-bs-toggle="tooltip" data-placement="top" aria-label="Edit" data-bs-original-title="Edit"><i class="la la-edit"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">6</th>
-                                            <td>
-                                                <div class="table-content">
-                                                    <h3 class="title">Amir Hamja</h3>
-                                                </div>
-                                            </td>
-                                            <td>amirhamja@gmail.com</td>
-                                            <td>United States</td>
-                                            <td>New York</td>
-                                            <td>
-                                                <span class="badge text-bg-success py-1 px-2">Active</span>
-                                            </td>
-                                            <td>
-                                                <div class="table-content">
-                                                    <a href="admin-dashboard-traveler-detail.html" class="theme-btn theme-btn-small me-2" data-bs-toggle="tooltip" data-placement="top" aria-label="View" data-bs-original-title="View"><i class="la la-eye"></i></a>
-                                                    <a href="#" class="theme-btn theme-btn-small" data-bs-toggle="tooltip" data-placement="top" aria-label="Edit" data-bs-original-title="Edit"><i class="la la-edit"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">7</th>
-                                            <td>
-                                                <div class="table-content">
-                                                    <h3 class="title">Peter Micahel</h3>
-                                                </div>
-                                            </td>
-                                            <td>petermicahel@gmail.com</td>
-                                            <td>United States</td>
-                                            <td>New York</td>
-                                            <td>
-                                                <span class="badge text-bg-warning text-white py-1 px-2">Inactive</span>
-                                            </td>
-                                            <td>
-                                                <div class="table-content">
-                                                    <a href="admin-dashboard-traveler-detail.html" class="theme-btn theme-btn-small me-2" data-bs-toggle="tooltip" data-placement="top" aria-label="View" data-bs-original-title="View"><i class="la la-eye"></i></a>
-                                                    <a href="#" class="theme-btn theme-btn-small" data-bs-toggle="tooltip" data-placement="top" aria-label="Edit" data-bs-original-title="Edit"><i class="la la-edit"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">8</th>
-                                            <td>
-                                                <div class="table-content">
-                                                    <h3 class="title">John Smith</h3>
-                                                </div>
-                                            </td>
-                                            <td>johnsmith@gmail.com</td>
-                                            <td>United States</td>
-                                            <td>New York</td>
-                                            <td>
-                                                <span class="badge text-bg-success py-1 px-2">Active</span>
-                                            </td>
-                                            <td>
-                                                <div class="table-content">
-                                                    <a href="admin-dashboard-traveler-detail.html" class="theme-btn theme-btn-small me-2" data-bs-toggle="tooltip" data-placement="top" aria-label="View" data-bs-original-title="View"><i class="la la-eye"></i></a>
-                                                    <a href="#" class="theme-btn theme-btn-small" data-bs-toggle="tooltip" data-placement="top" aria-label="Edit" data-bs-original-title="Edit"><i class="la la-edit"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">9</th>
-                                            <td>
-                                                <div class="table-content">
-                                                    <h3 class="title">Amir Sohail</h3>
-                                                </div>
-                                            </td>
-                                            <td>amirsohail@gmail.com</td>
-                                            <td>United States</td>
-                                            <td>New York</td>
-                                            <td>
-                                                <span class="badge text-bg-success py-1 px-2">Active</span>
-                                            </td>
-                                            <td>
-                                                <div class="table-content">
-                                                    <a href="admin-dashboard-traveler-detail.html" class="theme-btn theme-btn-small me-2" data-bs-toggle="tooltip" data-placement="top" aria-label="View" data-bs-original-title="View"><i class="la la-eye"></i></a>
-                                                    <a href="#" class="theme-btn theme-btn-small" data-bs-toggle="tooltip" data-placement="top" aria-label="Edit" data-bs-original-title="Edit"><i class="la la-edit"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">10</th>
-                                            <td>
-                                                <div class="table-content">
-                                                    <h3 class="title">Jack Bauer</h3>
-                                                </div>
-                                            </td>
-                                            <td>jackbauer@gmail.com</td>
-                                            <td>United States</td>
-                                            <td>New York</td>
-                                            <td>
-                                                <span class="badge text-bg-success py-1 px-2">Active</span>
-                                            </td>
-                                            <td>
-                                                <div class="table-content">
-                                                    <a href="admin-dashboard-traveler-detail.html" class="theme-btn theme-btn-small me-2" data-bs-toggle="tooltip" data-placement="top" aria-label="View" data-bs-original-title="View"><i class="la la-eye"></i></a>
-                                                    <a href="#" class="theme-btn theme-btn-small" data-bs-toggle="tooltip" data-placement="top" aria-label="Edit" data-bs-original-title="Edit"><i class="la la-edit"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="col-lg-4 responsive-column">
+                                    <div class="input-box">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" name="text" placeholder="Search..." v-model="searchValue">
+                                        </div>
+                                    </div>
                                 </div>
+
+                                <!-- DataTable component -->
+                                <EasyDataTable
+                                    :headers="headers"
+                                    :items="formattedItems"
+                                    :search-field="searchField"
+                                    :search-value="searchValue"
+                                    show-index
+                                >
+                                    <template #item-destination="item">
+                                        <p>{{ item.destination.name }}</p>
+                                    </template>
+                                    <template #item-class="item">
+                                        <p>{{ item.destination_class.name }}</p>
+                                    </template>
+                                    <template #item-airline="item">
+                                        <p>{{ item.airline.name }}</p>
+                                    </template>
+                                    <template #item-price="item">
+                                        <p>{{ item.destination_class.price }}</p>
+                                    </template>
+                                    <template #item-departure="item">
+                                        <p>{{ formatDateTime(item.departure) }}</p>
+                                    </template>
+                                    <template #item-arrival="item">
+                                        <p>{{ formatDateTime(item.arrival) }}</p>
+                                    </template>
+                                    <template #item-actions="item">
+                                        <a @click.prevent="viewDetails(item)" href="#" class="theme-btn theme-btn-small me-2" data-bs-toggle="modal" data-bs-target="#loginPopupForm"><i class="la la-eye"></i></a>
+                                        <router-link :to="`/admin/flights/${item.id}/edit`" class="theme-btn theme-btn-small me-2" aria-label="Edit details" data-bs-original-title="Edit details"><i class="la la-edit"></i></router-link>
+                                        <a @click.prevent="confirmDelete(item)" href="#" class="theme-btn theme-btn-small me-2" data-bs-toggle="tooltip" data-placement="top" aria-label="Delete details" data-bs-original-title="Delete details"><i class="la la-trash"></i></a>
+                                    </template>
+                                </EasyDataTable>
                             </div>
                         </div>
-                        <!-- end form-box -->
-                    </div>
-                    <!-- end col-lg-12 -->
-                </div>
-                <!-- end row -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link page-link-nav" href="#" aria-label="Previous">
-                                        <span aria-hidden="true"><i class="la la-angle-left"></i></span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link page-link-nav" href="#">1</a>
-                                </li>
-                                <li class="page-item active">
-                                    <a class="page-link page-link-nav" href="#">2 <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link page-link-nav" href="#">3</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link page-link-nav" href="#" aria-label="Next">
-                                        <span aria-hidden="true"><i class="la la-angle-right"></i></span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
                     </div>
                 </div>
+
+                <!-- Footer -->
                 <div class="border-top mt-5"></div>
-                <div class="row align-items-center">
-                    <div class="col-lg-7">
-                        <div class="copy-right padding-top-30px">
-                            <p class="copy__desc">
-                                © Copyright Trizen <span id="get-year">2024</span> . Made
-                                with <span class="la la-heart"></span> by
-                                <a href="https://themeforest.net/user/techydevs/portfolio">TechyDevs</a>
-                            </p>
-                        </div>
-                        <!-- end copy-right -->
-                    </div>
-                    <!-- end col-lg-7 -->
-                    <div class="col-lg-5">
-                        <div class="copy-right-content text-end padding-top-30px">
-                            <ul class="social-profile">
-                                <li>
-                                    <a href="#"><i class="lab la-facebook-f"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="lab la-twitter"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="lab la-instagram"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="lab la-linkedin-in"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- end copy-right-content -->
-                    </div>
-                    <!-- end col-lg-5 -->
-                </div>
-                <!-- end row -->
+                <Footer></Footer>
             </div>
-            <!-- end container-fluid -->
         </div>
-        <!-- end dashboard-main-content -->
     </div>
 </template>
+
+<script setup lang="ts">
+import { ref, onMounted } from 'vue';
+import Footer from '../shared/Footer.vue';
+import axios from 'axios';
+import { useRouter } from 'vue-router';
+import { Header, Item } from 'vue3-easy-data-table';
+
+const searchField = ['destination', 'destination_class', 'airline'];
+const searchValue = ref('');
+
+const headers: Header[] = [
+    { text: 'DESTINATION', value: 'destination' },
+    { text: 'CLASS', value: 'class' },
+    { text: 'AIRLINE', value: 'airline' },
+    { text: 'FLIGHT TYPE', value: 'flight_type' },
+    { text: 'NO OF PASS', value: 'no_of_passengers' },
+    { text: 'ORIGINAL PRICE', value: 'price' },
+    { text: 'CURRENT PRICE', value: 'current_price' },
+    { text: 'DEPARTURE', value: 'departure' },
+    { text: 'ARRIVAL', value: 'arrival' },
+    { text: 'STATUS', value: 'status', sortable: true },
+    { text: 'Actions', value: 'actions' },
+];
+
+const items: Item[] = ref([]);
+const formattedItems = ref([]);
+
+const router = useRouter();
+const image_url = ref('');
+
+const viewDetails = (item: Item) => {
+    image_url.value = item.media_url
+};
+
+const confirmDelete = (item: Item) => {
+    if (confirm(`Are you sure you want to delete ${item.name}?`)) {
+        deleteItem(item);
+    }
+};
+
+const deleteItem = async (item: Item) => {
+    try {
+        await axios.delete(`/api/admin/flights/${item.id}`);
+        items.value = items.value.filter(i => i.id !== item.id);
+    } catch (error) {
+        console.error('Error deleting flight:', error);
+    }
+};
+
+const formatDateTime = (dateTimeStr: string) => {
+    const dateTime = new Date(dateTimeStr);
+    const options = { day: 'numeric', month: 'short', hour: 'numeric', minute: 'numeric' };
+    return dateTime.toLocaleDateString('en-US', options);
+};
+
+onMounted(async () => {
+    try {
+        const response = await axios.get('/api/admin/flights');
+        items.value = response.data.flights; // Update reactive reference
+        formattedItems.value = response.data.flights.map((flight: Item) => ({
+            ...flight,
+            departure: formatDateTime(flight.departure),
+            arrival: formatDateTime(flight.arrival),
+        }));
+    } catch (error) {
+        console.error('Error fetching flights:', error);
+    }
+});
+</script>
+
+<style scoped>
+.form-select {
+    height: 50px;
+    line-height: inherit;
+    padding: 10px 20px 10px 40px;
+    font-size: 13px;
+    color: #0d233e;
+}
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+button:hover {
+    background-color: #0056b3;
+}
+</style>

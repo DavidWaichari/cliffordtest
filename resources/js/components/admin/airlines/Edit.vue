@@ -156,7 +156,7 @@ onMounted(async () => {
 
 const submitForm = async () => {
     try {
-        const response = await axios.post('/api/admin/airlines', form.value);
+        const response = await axios.put('/api/admin/airlines', form.value);
 
         if (response.data.success) {
             router.push({ path: '/admin/airlines' });

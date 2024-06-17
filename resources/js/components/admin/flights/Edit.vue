@@ -19,7 +19,7 @@
                             <ul class="list-items">
                                 <li><a href="index.html" class="text-white">Home</a></li>
                                 <li>Dashboard</li>
-                                <li>Add Flights</li>
+                                <li>Edit Flight</li>
                             </ul>
                         </div>
                         <!-- end breadcrumb-list -->
@@ -38,7 +38,7 @@
                             <div class="form-box">
                                 <div class="form-title-wrap">
                                     <h3 class="title">
-                                        <i class="la la-gear me-2 text-gray"></i>Add flight
+                                        <i class="la la-gear me-2 text-gray"></i>Edit flight
                                     </h3>
                                 </div>
                                 <!-- form-title-wrap -->
@@ -87,7 +87,7 @@
                                             <!-- Place Name Input -->
                                             <div class="input-box">
                                                 <label class="label-text">
-                                                   Flight Type
+                                                    Flight Type
                                                 </label>
                                                 <div class="form-group">
                                                     <span class="la la-briefcase form-icon"></span>
@@ -191,14 +191,14 @@
 
 <script setup lang="ts">
 import axios from 'axios';
-import { useRouter } from 'vue-router';
+import {useRoute, useRouter} from 'vue-router';
 import {onMounted, ref} from 'vue';
 import Footer from '../shared/Footer.vue'
 
 const router = useRouter();
+const route = useRoute();
 
 const form = ref({
-    name: '',
     destination_id: '',
     destination_class_id: '',
     airline_id: '',
@@ -219,6 +219,10 @@ onMounted(async () => {
     try {
         const dest = await axios.get('/api/admin/destinations');
         const air = await axios.get('/api/admin/airlines');
+        const flightres = await axios.get('/api/admin/flights/'+route.params.id)
+
+
+        form.value = flightres.data.flight;
         destinations.value = dest.data.destinations;
         airlines.value = air.data.airlines;
     } catch (error) {
@@ -239,7 +243,7 @@ const fetchFlightClass = async() =>{
 
 const submitForm = async () => {
     try {
-        const response = await axios.post('/api/admin/flights', form.value, {
+        const response = await axios.put('/api/admin/flights/'+route.params.id, form.value, {
         });
 
         if (response.data.success) {

@@ -16,7 +16,6 @@ return new class extends Migration
             $table->unsignedBigInteger('destination_id');
             $table->string('name')->nullable();
             $table->decimal('price', 10, 2)->default(0);
-            $table->decimal('current_price', 10, 2)->default(0);
             $table->string('status')->nullable();
             $table->text('extras')->nullable();
             $table->timestamps();

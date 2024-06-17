@@ -22,6 +22,10 @@ protected $fillable = [
 
 protected $appends = ['media_url'];
 
+public function destclasses()
+{
+    return $this->hasMany(DestinationClass::class, 'destination_id');
+}
 public function getMediaUrlAttribute()
 {
 $media = $this->getFirstMedia('images');

@@ -130,7 +130,6 @@ const headers: Header[] = [
     { text: 'NAME', value: 'name' },
     { text: 'DESTINATION', value: 'destination' },
     { text: 'PRICE', value: 'price' },
-    { text: 'CURRENT PRICE', value: 'current_price' },
     { text: 'STATUS', value: 'status', sortable: true },
     { text: 'Actions', value: 'actions' },
 ];

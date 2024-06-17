@@ -83,18 +83,6 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
-                                            <div class="input-box">
-                                                <label class="label-text">
-                                                    Current Price
-                                                </label>
-                                                <div class="form-group">
-                                                    <span class="la la-money form-icon"></span>
-                                                    <input class="form-control" name="current_price" type="number" min="0" step=".01" placeholder="current price" v-model="form.current_price" required>
-                                                    <div class="invalid-feedback">Please provide a the current price.</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
                                             <!-- Status Select -->
                                             <div class="input-box">
                                                 <label class="label-text">Status</label>
@@ -149,7 +137,6 @@ const form = ref({
     name: '',
     destination_id: '',
     price: '',
-    current_price: '',
     status: 'Active'
 });
 

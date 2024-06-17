@@ -46,7 +46,7 @@ class DestinationController extends Controller
     public function show(string $id)
     {
         try {
-            $destination = Destination::findOrFail($id);
+            $destination = Destination::where('id', $id)->with('destclasses')->first();
             return response()->json(['success' => true, 'destination' => $destination], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'error' => $e->getMessage()], 404);

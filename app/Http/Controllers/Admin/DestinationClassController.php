@@ -26,7 +26,6 @@ class DestinationClassController extends Controller
         $request->validate([
             'name' => 'nullable|string|max:255',
             'price' => 'nullable|numeric',
-            'current_price' => 'nullable|numeric',
             'destination_id' => 'required|integer',
             'status' => 'nullable|string',
         ]);
@@ -42,8 +41,8 @@ class DestinationClassController extends Controller
     public function show(string $id)
     {
         try {
-            $destinationClass = DestinationClass::findOrFail($id);
-            return response()->json(['success' => true, 'destinationClass' => $destinationClass], 200);
+            $destination_class = DestinationClass::findOrFail($id);
+            return response()->json(['success' => true, 'destination_class' => $destination_class], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'error' => $e->getMessage()], 404);
         }
@@ -58,7 +57,6 @@ class DestinationClassController extends Controller
             $request->validate([
                 'name' => 'nullable|string|max:255',
                 'price' => 'nullable|numeric',
-                'current_price' => 'nullable|numeric',
                 'destination_id' => 'required|integer',
                 'status' => 'nullable|string',
             ]);

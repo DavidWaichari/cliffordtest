@@ -4,6 +4,7 @@ import AdminDashboard from './components/admin/Dashboard.vue';
 import BookingsIndex from './components/admin/bookings/Index.vue';
 import FlightIndex from './components/admin/flights/Index.vue';
 import FlightCreate from './components/admin/flights/Create.vue';
+import FlightEdit from './components/admin/flights/Edit.vue';
 import Destinations from './components/admin/destinations/Index.vue';
 import DestinationsCreate from './components/admin/destinations/Create.vue';
 import DestinationsEdit from './components/admin/destinations/Edit.vue';
@@ -55,6 +56,10 @@ const routes = [
             {
                 path:'flights/create',
                 component:FlightCreate
+            },
+            {
+                path:'flights/:id/edit',
+                component:FlightEdit
             },
             {
                 path:'destinations',
