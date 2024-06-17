@@ -93,6 +93,19 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
+                                            <!-- Current Name Input -->
+                                            <div class="input-box">
+                                                <label class="label-text">
+                                                    Current Price
+                                                </label>
+                                                <div class="form-group">
+                                                    <span class="la la-money form-icon"></span>
+                                                    <input class="form-control" name="current_price" type="number" min="0" step=".01" placeholder="current price" v-model="form.current_price" required>
+                                                    <div class="invalid-feedback">Please provide a the current price.</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
                                             <div class="input-box">
                                                 <label class="label-text">Status</label>
                                                 <div class="form-group w-100">
@@ -149,6 +162,7 @@ const form = ref({
     description: '',
     landmark: '',
     price: '',
+    current_price: '',
     status: 'Active'
 });
 
@@ -161,6 +175,7 @@ const formErrors = ref({
     description: '',
     landmark: '',
     price: '',
+    current_price: '',
     status: '',
     image: ''
 });
@@ -179,6 +194,7 @@ const submitForm = async () => {
         formData.append('description', form.value.description);
         formData.append('landmark', form.value.landmark);
         formData.append('price', form.value.price);
+        formData.append('current_price', form.value.current_price);
         formData.append('status', form.value.status);
         if (file) {
             formData.append('image', file);
@@ -214,6 +230,7 @@ const resetForm = () => {
         description: '',
         landmark: '',
         price: '',
+        current_price: '',
         status: '',
         image: ''
     };
@@ -228,6 +245,7 @@ onMounted(async () => {
         form.value.description = destination.description;
         form.value.landmark = destination.landmark;
         form.value.price = destination.price;
+        form.value.current_price = destination.current_price;
         form.value.status = destination.status;
         // Optionally set other fields here
 

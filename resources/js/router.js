@@ -7,6 +7,9 @@ import FlightCreate from './components/admin/flights/Create.vue';
 import Destinations from './components/admin/destinations/Index.vue';
 import DestinationsCreate from './components/admin/destinations/Create.vue';
 import DestinationsEdit from './components/admin/destinations/Edit.vue';
+import DestinationClasses from './components/admin/destination_classes/Index.vue';
+import DestinationsClassesCreate from './components/admin/destination_classes/Create.vue';
+import DestinationsClassesEdit from './components/admin/destination_classes/Edit.vue';
 
 //user
 import UserLayout from './components/layouts/User.vue'
@@ -61,6 +64,18 @@ const routes = [
             {
                 path:'destinations/:id/edit',
                 component: DestinationsEdit
+            },
+            {
+                path:'destination_classes',
+                component: DestinationClasses
+            },
+            {
+                path:'destination_classes/create',
+                component: DestinationsClassesCreate
+            },
+            {
+                path:'destination_classes/:id/edit',
+                component: DestinationsClassesEdit
             }
 
         ]

@@ -15,6 +15,7 @@ protected $fillable = [
 'description',
 'landmark',
     'price',
+    'current_price',
 'status',
 'extras',
 ];

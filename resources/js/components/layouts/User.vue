@@ -198,7 +198,7 @@
                             ></a>
                             <div class="logo" >
                                 <a href="/" style="font-weight:bolder; font-size:30px;color:#e20177; font-family:'Red Serif', serif;">
-                                    <img src="/trizen-demo/html/images/logo.png" alt="logo"/>
+<!--                                    <img src="/trizen-demo/html/images/logo.png" alt="logo"/>-->
                                     DaveTravels
                                 </a>
                                 <div class="menu-toggler">

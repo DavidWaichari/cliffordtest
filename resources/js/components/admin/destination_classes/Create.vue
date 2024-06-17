@@ -7,7 +7,7 @@
                         <div class="breadcrumb-content">
                             <div class="section-heading">
                                 <h2 class="sec__title font-size-30 text-white">
-                                    Destinations
+                                    Destination Classes
                                 </h2>
                             </div>
                         </div>
@@ -19,7 +19,7 @@
                             <ul class="list-items">
                                 <li><a href="index.html" class="text-white">Home</a></li>
                                 <li>Dashboard</li>
-                                <li>Add Destination</li>
+                                <li>Add Destination Class</li>
                             </ul>
                         </div>
                         <!-- end breadcrumb-list -->
@@ -38,68 +38,38 @@
                             <div class="form-box">
                                 <div class="form-title-wrap">
                                     <h3 class="title">
-                                        <i class="la la-gear me-2 text-gray"></i>Add destination information for your flights
+                                        <i class="la la-gear me-2 text-gray"></i>Add destination class information for your flights
                                     </h3>
                                 </div>
                                 <!-- form-title-wrap -->
                                 <div class="form-content contact-form-action">
                                     <div class="row">
                                         <div class="col-lg-6">
+                                            <!-- Status Select -->
+                                            <div class="input-box">
+                                                <label class="label-text">Destination class name</label>
+                                                <div class="form-group w-100">
+                                                    <select class="form-select" v-model="form.destination_id" required name="destination_id">
+                                                        <option :value="destination.id" v-for="destination in destinations">
+                                                            {{ destination.name }}</option>
+                                                    </select>
+                                                    <div class="invalid-feedback">Please select a destination class.</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
                                             <!-- Place Name Input -->
                                             <div class="input-box">
                                                 <label class="label-text">
-                                                    Place Name
+                                                   Name
                                                 </label>
                                                 <div class="form-group">
                                                     <span class="la la-briefcase form-icon"></span>
-                                                    <input class="form-control" type="text" placeholder="Destination name" v-model="form.name" required name="name">
-                                                    <div class="invalid-feedback">Please provide a destination name.</div>
+                                                    <input class="form-control" type="text" placeholder="Destination class name" v-model="form.name" required name="name">
+                                                    <div class="invalid-feedback">Please provide a destination class name.</div>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="col-lg-6">
-                                            <!-- Description Textarea -->
-                                            <div class="input-box">
-                                                <label class="label-text">
-                                                    Description
-                                                </label>
-                                                <div class="form-group">
-                                                    <span class="la la-briefcase form-icon"></span>
-                                                    <textarea class="form-control" name="description" placeholder="Destination description" v-model="form.description" required></textarea>
-                                                    <div class="invalid-feedback">Please provide a destination description.</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <!-- Landmark Name Input -->
-                                            <div class="input-box">
-                                                <label class="label-text">
-                                                    Landmark Name
-                                                </label>
-                                                <div class="form-group">
-                                                    <span class="la la-briefcase form-icon"></span>
-                                                    <input class="form-control" name="landmark" type="text" placeholder="Landmark name" v-model="form.landmark" required>
-                                                    <div class="invalid-feedback">Please provide a landmark name.</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <!-- Status Select -->
-                                            <div class="input-box">
-                                                <label class="label-text">Status</label>
-                                                <div class="form-group w-100">
-                                                    <select class="form-select" v-model="form.status" required name="status">
-                                                        <option value="Active">Active</option>
-                                                        <option value="Inactive">Inactive</option>
-                                                    </select>
-                                                    <div class="invalid-feedback">Please select a status.</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                         <div class="col-lg-6">
                                             <div class="input-box">
                                                 <label class="label-text">
@@ -124,16 +94,16 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="col-lg-6">
-                                            <!-- File Upload Input -->
+                                            <!-- Status Select -->
                                             <div class="input-box">
-                                                <label class="label-text">
-                                                    Upload Image
-                                                </label>
-                                                <div class="form-group">
-                                                    <input class="form-control" type="file" @change="handleFileUpload">
-                                                    <div class="invalid-feedback">Please upload an image.</div>
+                                                <label class="label-text">Status</label>
+                                                <div class="form-group w-100">
+                                                    <select class="form-select" v-model="form.status" required name="status">
+                                                        <option value="Active">Active</option>
+                                                        <option value="Inactive">Inactive</option>
+                                                    </select>
+                                                    <div class="invalid-feedback">Please select a status.</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -169,49 +139,36 @@
 <script setup lang="ts">
 import axios from 'axios';
 import { useRouter } from 'vue-router';
-import { ref } from 'vue';
+import {onMounted, ref} from 'vue';
 
 const router = useRouter();
 
 const form = ref({
     name: '',
-    description: '',
-    landmark: '',
+    destination_id: '',
     price:'',
     current_price:'',
     status: 'Active'
 });
 
-let file: File | null = null;
+const destinations = ref([]);
 
-const handleFileUpload = (event: Event) => {
-    const target = event.target as HTMLInputElement;
-    if (target.files && target.files.length > 0) {
-        file = target.files[0];
+onMounted(async () => {
+    try {
+        const response = await axios.get('/api/admin/destinations');
+        destinations.value = response.data.destinations; // Update reactive reference
+    } catch (error) {
+        console.error('Error fetching destinations:', error);
     }
-};
+});
 
 const submitForm = async () => {
     try {
-        const formData = new FormData();
-        formData.append('name', form.value.name);
-        formData.append('description', form.value.description);
-        formData.append('landmark', form.value.landmark);
-        formData.append('price', form.value.price);
-        formData.append('current_price', form.value.current_price);
-        formData.append('status', form.value.status);
-        if (file) {
-            formData.append('image', file);
-        }
-
-        const response = await axios.post('/api/admin/destinations', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
+        const response = await axios.post('/api/admin/destination_classes', form.value, {
         });
 
         if (response.data.success) {
-            router.push({ path: '/admin/destinations' });
+            router.push({ path: '/admin/destination_classes' });
         }
 
         resetForm();
@@ -222,12 +179,10 @@ const submitForm = async () => {
 
 const resetForm = () => {
     form.value.name = '';
-    form.value.description = '';
-    form.value.landmark = '';
+    form.value.destination_id = '';
     form.value.price = '';
     form.value.current_price = '';
     form.value.status = 'Active';
-    file = null;
 };
 </script>
 

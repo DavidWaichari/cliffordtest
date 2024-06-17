@@ -373,15 +373,16 @@
                         </li>
 
                         <li>
+                            <router-link to="/admin/destination_classes"
+                                         :class="{ 'router-link-exact-active': $route.fullPath.startsWith('/admin/destination_classes') }"><i class="la la-list me-2 text-color-4"></i>Travel Classes</router-link
+                            >
+                        </li>
+
+                        <li>
                             <router-link to="/admin/destinations" :class="{ 'router-link-exact-active': $route.fullPath.startsWith('/admin/destinations') }"><i class="la la-users me-2 text-color-3"></i>Destinations</router-link
                             >
                         </li>
-                        <li>
-                            <router-link to="/"
-                            ><i class="la la-list me-2 text-color-4"></i>Visa
-                                Application</router-link
-                            >
-                        </li>
+
                         <li>
                             <a href="admin-dashboard-reviews.html"
                             ><i class="la la-star me-2 text-color-5"></i>Reviews</a

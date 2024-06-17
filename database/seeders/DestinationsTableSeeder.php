@@ -16,27 +16,27 @@ class DestinationsTableSeeder extends Seeder
     {
         $destinations = [
             [
-                'name' => 'Eiffel Tower',
-                'description' => 'Famous landmark in Paris',
-                'landmark' => 'Eiffel Tower',
+                'name' => 'Maasai Mara',
+                'description' => 'Famous for the Great Migration',
+                'landmark' => 'Maasai Mara National Reserve',
                 'status' => 'Active',
             ],
             [
-                'name' => 'Statue of Liberty',
-                'description' => 'Iconic statue in New York',
-                'landmark' => 'Statue of Liberty',
+                'name' => 'Mount Kenya',
+                'description' => 'Highest mountain in Kenya',
+                'landmark' => 'Mount Kenya',
                 'status' => 'Active',
             ],
             [
-                'name' => 'Great Wall of China',
-                'description' => 'Ancient wall in China',
-                'landmark' => 'Great Wall',
+                'name' => 'Diani Beach',
+                'description' => 'Popular beach destination on the Indian Ocean coast',
+                'landmark' => 'Diani Beach',
                 'status' => 'Active',
             ],
             [
-                'name' => 'Sydney Opera House',
-                'description' => 'Famous opera house in Sydney',
-                'landmark' => 'Opera House',
+                'name' => 'Lamu Old Town',
+                'description' => 'UNESCO World Heritage site with historic Swahili architecture',
+                'landmark' => 'Lamu Old Town',
                 'status' => 'Active',
             ],
         ];
