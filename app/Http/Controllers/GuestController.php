@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Destination;
+use App\Models\Flight;
 use Illuminate\Http\Request;
 
 class GuestController extends Controller
@@ -11,5 +12,16 @@ class GuestController extends Controller
     {
         $destinations = Destination::orderBy('created_at', 'desc')->get();
         return response()->json(['success' => true, 'destinations' => $destinations], 200);
+    }
+
+    public function flights()
+    {
+        $flights = Flight::orderBy('created_at', 'desc')
+            ->where('status', 'Active')
+            ->with('destination')
+            ->with('destinationClass')
+            ->with('airline')
+            ->get();
+        return response()->json(['success' => true, 'flights' => $flights]);
     }
 }

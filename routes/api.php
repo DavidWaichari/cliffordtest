@@ -17,4 +17,5 @@ Route::prefix('admin')->group(function () {
 
 Route::prefix('guest')->group(function () {
     Route::get('destinations', [\App\Http\Controllers\GuestController::class, 'destinations']);
+    Route::get('active_flights', [\App\Http\Controllers\GuestController::class, 'flights']);
 });

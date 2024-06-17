@@ -18,6 +18,7 @@ import AirlinesEdit from './components/admin/airlines/Edit.vue';
 //user
 import UserLayout from './components/layouts/User.vue'
 import Homepage from './components/user/Homepage.vue'
+import FlightDetails from './components/user/flights/Details.vue'
 
 
 
@@ -30,6 +31,10 @@ const routes = [
             {
                 path: '',
                 component: Homepage
+            },
+            {
+                path: 'flights/:id/details',
+                component: FlightDetails
             }
         ]
     },

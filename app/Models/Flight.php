@@ -40,6 +40,9 @@ class Flight extends Model
         'arrival' => 'datetime',
     ];
 
+    protected $appends = [
+        'discount'
+    ];
     /**
      * Get the destination associated with the flight.
      */
@@ -62,5 +65,17 @@ class Flight extends Model
     public function airline()
     {
         return $this->belongsTo(Airline::class);
+    }
+
+    public function getDiscountAttribute()
+    {
+        $original_price = DestinationClass::find($this->destination_class_id)->price;
+        $current_price = $this->current_price;
+        $discount = 0;
+        if ($current_price < $original_price){
+            //%discount
+            $discount = ($original_price - $current_price) / $original_price * 100;
+        }
+        return $discount;
     }
 }

@@ -1121,207 +1121,34 @@
             </div>
             <!-- end row -->
             <div class="row padding-top-60px">
-                <div class="col-lg-4 responsive-column">
-                    <div class="card-item flight-card">
-                        <div class="card-img">
-                            <a href="flight-single.html" class="d-block">
-                                <img src="/trizen-demo/html/images/img15.jpg" alt="destination-img" />
-                                <span class="badge">Paris</span>
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <img
-                                src="/trizen-demo/html/images/american-airline.png"
-                                alt=""
-                                class="flight-logo"
-                            />
-                            <h3 class="card-title">
-                                <a href="flight-single.html">London to Paris</a>
-                            </h3>
-                            <p class="card-meta">One way Flight</p>
-                            <div
-                                class="card-price d-flex align-items-center justify-content-between"
-                            >
-                                <p>
-                                    <span class="price__from">From</span>
-                                    <span class="price__num">$399.00</span>
-                                </p>
-                                <a href="flight-single.html" class="btn-text"
-                                >Read details<i class="la la-angle-right"></i
-                                ></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end card-item -->
-                </div>
-                <!-- end col-lg-4 -->
-                <div class="col-lg-4 responsive-column">
+                <div class="col-lg-4 responsive-column" v-for="flight in flights" :key="flight.id">
                     <div class="card-item flight-card">
                         <div class="card-img">
                             <a href="flight-single.html" class="d-block">
                                 <img src="/trizen-demo/html/images/img16.jpg" alt="destination-img" />
-                                <span class="badge">Spain</span>
-                                <span class="badge badge-ribbon">Save 29%</span>
+                                <span class="badge">{{flight.destination.name}}</span>
+
+                                <span class="badge badge-ribbon" v-if="flight.discount > 0">Save {{flight.discount}}%</span>
                             </a>
                         </div>
                         <div class="card-body">
-                            <img
-                                src="/trizen-demo/html/images/united-airline.png"
-                                alt=""
-                                class="flight-logo"
-                            />
                             <h3 class="card-title">
-                                <a href="flight-single.html">Dubai to Spain</a>
+                                <a href="#">Nairobi to {{flight.destination.name}}</a>
                             </h3>
-                            <p class="card-meta">Round-trip Flight</p>
+                            <p class="card-meta">{{ flight.flight_type }} Flight</p>
                             <div
                                 class="card-price d-flex align-items-center justify-content-between"
                             >
                                 <p>
                                     <span class="price__from">From</span>
-                                    <span class="price__num">$570.00</span>
+                                    <span class="price__num">KES {{ flight.current_price }}</span>
                                     <span class="price__num before-price color-text-3"
-                                    >$599.00</span
+                                          v-if="flight.discount > 0">KES {{ flight.destination_class.price }}</span
                                     >
                                 </p>
-                                <a href="flight-single.html" class="btn-text"
+                                <router-link :to="`/flights/${flight.id}/details`" class="btn-text"
                                 >Read details<i class="la la-angle-right"></i
-                                ></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end card-item -->
-                </div>
-                <!-- end col-lg-4 -->
-                <div class="col-lg-4 responsive-column">
-                    <div class="card-item flight-card">
-                        <div class="card-img">
-                            <a href="flight-single.html" class="d-block">
-                                <img src="/trizen-demo/html/images/img17.jpg" alt="destination-img" />
-                                <span class="badge">Australia</span>
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <img src="/trizen-demo/html/images/air-france.png" alt="" class="flight-logo" />
-                            <h3 class="card-title">
-                                <a href="flight-single.html">Bangkok to Australia</a>
-                            </h3>
-                            <p class="card-meta">One way Flight</p>
-                            <div
-                                class="card-price d-flex align-items-center justify-content-between"
-                            >
-                                <p>
-                                    <span class="price__from">From</span>
-                                    <span class="price__num">$299.00</span>
-                                </p>
-                                <a href="flight-single.html" class="btn-text"
-                                >Read details<i class="la la-angle-right"></i
-                                ></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end card-item -->
-                </div>
-                <!-- end col-lg-4 -->
-                <div class="col-lg-4 responsive-column">
-                    <div class="card-item flight-card">
-                        <div class="card-img">
-                            <a href="flight-single.html" class="d-block">
-                                <img src="/trizen-demo/html/images/img18.jpg" alt="destination-img" />
-                                <span class="badge">Turkey</span>
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <img
-                                src="/trizen-demo/html/images/american-airline.png"
-                                alt=""
-                                class="flight-logo"
-                            />
-                            <h3 class="card-title">
-                                <a href="flight-single.html">London to Turkey</a>
-                            </h3>
-                            <p class="card-meta">Round-trip Flight</p>
-                            <div
-                                class="card-price d-flex align-items-center justify-content-between"
-                            >
-                                <p>
-                                    <span class="price__from">From</span>
-                                    <span class="price__num">$599.00</span>
-                                </p>
-                                <a href="flight-single.html" class="btn-text"
-                                >Read details<i class="la la-angle-right"></i
-                                ></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end card-item -->
-                </div>
-                <!-- end col-lg-4 -->
-                <div class="col-lg-4 responsive-column">
-                    <div class="card-item flight-card">
-                        <div class="card-img">
-                            <a href="flight-single.html" class="d-block">
-                                <img src="/trizen-demo/html/images/img19.jpg" alt="destination-img" />
-                                <span class="badge">Dubai</span>
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <img
-                                src="/trizen-demo/html/images/delta-airline.png"
-                                alt=""
-                                class="flight-logo"
-                            />
-                            <h3 class="card-title">
-                                <a href="flight-single.html">New york to Dubai</a>
-                            </h3>
-                            <p class="card-meta">Round-trip Flight</p>
-                            <div
-                                class="card-price d-flex align-items-center justify-content-between"
-                            >
-                                <p>
-                                    <span class="price__from">From</span>
-                                    <span class="price__num">$599.00</span>
-                                </p>
-                                <a href="flight-single.html" class="btn-text"
-                                >Read details<i class="la la-angle-right"></i
-                                ></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end card-item -->
-                </div>
-                <!-- end col-lg-4 -->
-                <div class="col-lg-4 responsive-column">
-                    <div class="card-item flight-card">
-                        <div class="card-img">
-                            <a href="flight-single.html" class="d-block">
-                                <img
-                                    src="/trizen-demo/html/images/destination-img3.jpg"
-                                    alt="destination-img"
-                                />
-                                <span class="badge">Chicago</span>
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <img
-                                src="/trizen-demo/html/images/cathay-pacific-airline.png"
-                                alt=""
-                                class="flight-logo"
-                            />
-                            <h3 class="card-title">
-                                <a href="flight-single.html">Dhaka to Chicago</a>
-                            </h3>
-                            <p class="card-meta">One way Flight</p>
-                            <div
-                                class="card-price d-flex align-items-center justify-content-between"
-                            >
-                                <p>
-                                    <span class="price__from">From</span>
-                                    <span class="price__num">$399.00</span>
-                                </p>
-                                <a href="flight-single.html" class="btn-text"
-                                >Read details<i class="la la-angle-right"></i
-                                ></a>
+                                ></router-link>
                             </div>
                         </div>
                     </div>
@@ -1391,80 +1218,20 @@
     <!-- ================================
     END DESTINATION AREA
     ================================= -->
-
-    <div class="section-block"></div>
-
-    <!-- ================================
-    START CTA AREA
-    ================================= -->
-    <section
-        class="cta-area subscriber-area section-bg-2 padding-top-60px padding-bottom-60px"
-    >
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-7">
-                    <div class="section-heading">
-                        <h2 class="sec__title font-size-30 text-white">
-                            Subscribe to see Secret Deals
-                        </h2>
-                    </div>
-                    <!-- end section-heading -->
-                </div>
-                <!-- end col-lg-7 -->
-                <div class="col-lg-5">
-                    <div class="subscriber-box">
-                        <div class="contact-form-action">
-                            <form action="#">
-                                <div class="input-box">
-                                    <label class="label-text text-white"
-                                    >Enter email address</label
-                                    >
-                                    <div class="form-group mb-0">
-                                        <span class="la la-envelope form-icon"></span>
-                                        <input
-                                            class="form-control"
-                                            type="email"
-                                            name="email"
-                                            placeholder="Email address"
-                                        />
-                                        <button
-                                            class="theme-btn theme-btn-small submit-btn"
-                                            type="submit"
-                                        >
-                                            Subscribe
-                                        </button>
-                                        <span class="font-size-14 pt-1 text-white-50"
-                                        ><i class="la la-lock me-1"></i>Don't worry your
-                        information is safe with us.</span
-                                        >
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- end section-heading -->
-                </div>
-                <!-- end col-lg-5 -->
-            </div>
-            <!-- end row -->
-        </div>
-        <!-- end container -->
-    </section>
-    <!-- end cta-area -->
-    <!-- ================================
-    END CTA AREA
-    ================================= -->
 </template>
 <script setup lang="ts">
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 
 const destinations = ref([]);
+const flights = ref([]);
 
 onMounted(async () => {
     try {
         const response = await axios.get('/api/guest/destinations');
+        const response1 = await axios.get('/api/guest/active_flights');
         destinations.value = response.data.destinations;
+        flights.value = response1.data.flights;
     } catch (error) {
         console.error('Error fetching destinations:', error);
     }
