@@ -1,59 +1,102 @@
 <template>
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div>
-                    <h5 class="modal-title title" id="exampleModalLongTitle">
-                        Register
-                    </h5>
-                    <p class="font-size-14">Hello! Welcome Create a New Account</p>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title text-center">Register</h5>
+                        <p class="card-subtitle mb-2 text-muted text-center">Hello! Welcome Create a New Account</p>
+                    </div>
+                    <div class="card-body">
+                        <form @submit.prevent="register">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input id="name" class="form-control" type="text" v-model="form.name" placeholder="Type your username" required autocomplete="name" autofocus>
+                                <div v-if="errors.name" class="text-danger">{{ errors.name[0] }}</div>
+                            </div>
+                            <!-- end input-box -->
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input id="email" class="form-control" type="email" v-model="form.email" placeholder="Type your email" required autocomplete="email">
+                                <div v-if="errors.email" class="text-danger">{{ errors.email[0] }}</div>
+                            </div>
+                            <!-- end input-box -->
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input id="password" class="form-control" type="password" v-model="form.password" placeholder="Type password" required autocomplete="new-password">
+                                <div v-if="errors.password" class="text-danger">{{ errors.password[0] }}</div>
+                            </div>
+                            <!-- end input-box -->
+                            <div class="mb-3">
+                                <label for="password-confirm" class="form-label">Repeat Password</label>
+                                <input id="password-confirm" class="form-control" type="password" v-model="form.password_confirmation" placeholder="Type again password" required autocomplete="new-password">
+                                <div v-if="errors.password_confirmation" class="text-danger">{{ errors.password_confirmation[0] }}</div>
+                            </div>
+                            <!-- end input-box -->
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary w-100">Register Account</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- end modal-body -->
                 </div>
-                <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true" class="la la-close"></span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="contact-form-action">
-                    <form method="POST" action="">
-                        <div class="input-box">
-                            <label class="label-text">Name</label>
-                            <div class="form-group">
-                                <span class="la la-user form-icon"></span>
-                                <input id="name" class="form-control" type="text" name="name" value="" placeholder="Type your username" required autocomplete="name" autofocus>
-                            </div>
-                        </div>
-                        <!-- end input-box -->
-                        <div class="input-box">
-                            <label class="label-text">Email Address</label>
-                            <div class="form-group">
-                                <span class="la la-envelope form-icon"></span>
-                                <input id="email" class="form-control" type="email" name="email"  placeholder="Type your email" required autocomplete="email">
-                            </div>
-                        </div>
-                        <!-- end input-box -->
-                        <div class="input-box">
-                            <label class="label-text">Password</label>
-                            <div class="form-group">
-                                <span class="la la-lock form-icon"></span>
-                                <input id="password" class="form-control" type="password" name="password" placeholder="Type password" required autocomplete="new-password">
-                            </div>
-                        </div>
-                        <!-- end input-box -->
-                        <div class="input-box">
-                            <label class="label-text">Repeat Password</label>
-                            <div class="form-group">
-                                <span class="la la-lock form-icon"></span>
-                                <input id="password-confirm" class="form-control" type="password" name="password_confirmation" placeholder="Type again password" required autocomplete="new-password">
-                            </div>
-                        </div>
-                        <!-- end input-box -->
-                        <div class="btn-box pt-3 pb-4">
-                            <button type="submit" class="theme-btn w-100">Register Account</button>
-                        </div>
-                    </form>
-                </div>
-                <!-- end contact-form-action -->
+                <!-- end modal-content -->
             </div>
         </div>
     </div>
 </template>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+import axios from 'axios';
+
+const form = ref({
+    name: '',
+    email: '',
+    password: '',
+    password_confirmation: ''
+});
+
+const errors = ref({
+    name: null,
+    email: null,
+    password: null,
+    password_confirmation: null
+});
+
+const register = async () => {
+    try {
+        const response = await axios.post('/api/auth/register', form.value);
+        if (response.data.success) {
+            alert('Registration successful');
+        }
+    } catch (error) {
+        if (error.response && error.response.data.errors) {
+            errors.value = error.response.data.errors;
+        } else {
+            console.error('Error during registration:', error);
+        }
+    }
+};
+</script>
+
+<style scoped>
+.card {
+    margin-top: 50px;
+}
+.card-header {
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+.card-body {
+    padding: 20px;
+}
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+.btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+</style>

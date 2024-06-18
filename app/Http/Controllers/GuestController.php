@@ -24,4 +24,14 @@ class GuestController extends Controller
             ->get();
         return response()->json(['success' => true, 'flights' => $flights]);
     }
+
+    public function fetchFlightDetails($id)
+    {
+        $flight = Flight::where('id', $id)
+            ->with('destination')
+            ->with('destinationClass')
+            ->with('airline')
+            ->first();
+        return response()->json(['success' => true, 'flight' => $flight]);
+    }
 }

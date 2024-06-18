@@ -19,7 +19,10 @@ import AirlinesEdit from './components/admin/airlines/Edit.vue';
 import UserLayout from './components/layouts/User.vue'
 import Homepage from './components/user/Homepage.vue'
 import FlightDetails from './components/user/flights/Details.vue'
+//authentication
 
+import Login from './components/auth/Login.vue';
+import Register from './components/auth/Register.vue';
 
 
 
@@ -31,6 +34,14 @@ const routes = [
             {
                 path: '',
                 component: Homepage
+            },
+            {
+                path: 'login',
+                component: Login
+            },
+            {
+                path: 'register',
+                component: Register
             },
             {
                 path: 'flights/:id/details',

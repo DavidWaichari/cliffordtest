@@ -41,7 +41,8 @@ class Flight extends Model
     ];
 
     protected $appends = [
-        'discount'
+        'discount',
+        'formatted_dates'
     ];
     /**
      * Get the destination associated with the flight.
@@ -77,5 +78,22 @@ class Flight extends Model
             $discount = ($original_price - $current_price) / $original_price * 100;
         }
         return $discount;
+    }
+
+    public function getFormattedDatesAttribute()
+    {
+        $departure = $this->departure;
+        $arrival = $this->arrival;
+
+        $duration = $departure->diff($arrival);
+
+        $hours = $duration->h;
+        $minutes = $duration->i;
+
+        return [
+            'departure' => $departure->format('d M Y, g:i a'),
+            'arrival' => $arrival->format('d M Y, g:i a'),
+            'duration' => "{$hours}H {$minutes}M",
+        ];
     }
 }

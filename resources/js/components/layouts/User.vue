@@ -158,22 +158,26 @@
                                     </div>
                                 </div>
                                 <div class="header-right-action">
-
                                     <a
-                                        href="#"
-                                        class="theme-btn theme-btn-small theme-btn-transparent me-1"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#signupPopupForm"
-                                    >Sign Up</a
-                                    >
-
-                                    <a
+                                        v-if="user_is_authenticated"
                                         href="#"
                                         class="theme-btn theme-btn-small"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#loginPopupForm"
-                                    >Login</a
+                                        @click.prevent="logout"
+                                    >Logout</a
                                     >
+                                    <div v-else>
+                                        <router-link
+                                            to="/register"
+                                            class="theme-btn theme-btn-small  me-1"
+                                        >Sign Up</router-link
+                                        >
+
+                                        <router-link
+                                            to="/login"
+                                            class="theme-btn theme-btn-small"
+                                        >Login</router-link
+                                        >
+                                    </div>
 
                                     <!--                                    <div class="select-contain select&#45;&#45;contain w-auto">-->
                                     <!--                                        <select class="select-contain-select" onchange="this.value === '24' && document.getElementById('logout-form').submit();">-->
@@ -212,13 +216,13 @@
                                 <nav>
                                     <ul>
                                         <li>
-                                            <router-link to="/admin">Home</router-link>
+                                            <router-link to="/" style="background-color: white">Home</router-link>
                                         </li>
                                         <li>
-                                            <a href="#">Destinations</a>
+                                            <a href="#" style="background-color: white">Destinations</a>
                                         </li>
                                         <li>
-                                            <a href="#">My Bookings</a>
+                                            <a href="#" style="background-color: white">My Bookings</a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -246,7 +250,7 @@
     ================================= -->
     <router-view></router-view>
     <div class="section-block"></div>
-    
+
     <!-- ================================
        START FOOTER AREA
     ================================= -->
@@ -439,8 +443,64 @@
 
 </template>
 <script setup>
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
 import Login from '../auth/Login.vue';
 import Register from '../auth/Register.vue';
-import {onMounted} from "vue";
 
+const user_is_authenticated = ref(false);
+
+onMounted(async () => {
+    checkIfAuthenticated();
+});
+
+const checkIfAuthenticated = async () => {
+    // Check if there is a token in localStorage and update user_is_authenticated accordingly
+    const token = localStorage.getItem('auth_token');
+
+    if (token) {
+        try {
+            // Validate the token by making a request to a protected endpoint
+            const response = await axios.get('/api/user', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            // If the request succeeds, set user_is_authenticated to true
+            user_is_authenticated.value = true;
+        } catch (error) {
+            // If there's an error (token is not valid or request fails), handle it
+            console.error('Token validation error:', error);
+            // Optionally, clear the invalid token from localStorage
+            localStorage.removeItem('auth_token');
+            user_is_authenticated.value = false; // Ensure user is marked as not authenticated
+        }
+    }
+};
+
+const logout = async () => {
+    const token = localStorage.getItem('auth_token');
+
+    if (token) {
+        try {
+            // Call the logout endpoint to revoke the token
+            const response = await axios.post('/api/auth/logout', null, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            // Clear the token from localStorage
+            localStorage.removeItem('auth_token');
+
+            // Update the authenticated status
+            user_is_authenticated.value = false;
+        } catch (error) {
+            console.error('Logout error:', error);
+        }
+    }
+};
 </script>
+
+

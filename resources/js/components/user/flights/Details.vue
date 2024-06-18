@@ -9,8 +9,8 @@
                     <div class="breadcrumb-list breadcrumb-top-list">
                         <ul class="list-items bg-transparent radius-none p-0">
                             <li><a href="index.html">Home</a></li>
-                            <li>France</li>
-                            <li>New york to paris</li>
+                            <li>Fligt</li>
+                            <li>Details</li>
                         </ul>
                     </div>
                     <!-- end breadcrumb-list -->
@@ -85,15 +85,9 @@
                         <div class="single-content-wrap padding-top-60px">
                             <div id="description" class="page-scroll">
                                 <div class="single-content-item pb-4">
-                                    <h3 class="title font-size-26">New York to Paris</h3>
+                                    <h3 class="title font-size-26">Nairobi to {{ flight.destination.name }}</h3>
                                     <div class="d-flex align-items-center pt-2">
-                                        <p class="me-2">One way flight</p>
-                                        <p>
-                        <span
-                            class="badge text-bg-warning text-white font-weight-medium font-size-16"
-                        >1 Stop</span
-                        >
-                                        </p>
+                                        <p class="me-2">{{ flight.flight_type }}</p>
                                     </div>
                                 </div>
                                 <!-- end single-content-item -->
@@ -105,14 +99,14 @@
                                                 <h3 class="title font-size-15 font-weight-medium">
                                                     Flight Take off
                                                 </h3>
-                                                <span class="font-size-13">12 Jun 2020, 7:50 am</span>
+                                                <span class="font-size-13">{{ flight.formatted_dates['departure'] }}</span>
                                             </div>
                                         </div>
                                         <!-- end col-lg-4 -->
                                         <div class="col-lg-4 col-sm-4">
                                             <div class="single-feature-titles text-center mb-3">
                                                 <i class="la la-clock-o text-color font-size-22"></i>
-                                                <span class="font-size-13 mt-n2">1H 40M</span>
+                                                <span class="font-size-13 mt-n2">{{ flight.formatted_dates['duration'] }}</span>
                                             </div>
                                         </div>
                                         <!-- end col-lg-4 -->
@@ -121,7 +115,7 @@
                                                 <h3 class="title font-size-15 font-weight-medium">
                                                     Flight Landing
                                                 </h3>
-                                                <span class="font-size-13">13 Jun 2020, 5:50 am</span>
+                                                <span class="font-size-13">{{ flight.formatted_dates['arrival'] }}</span>
                                             </div>
                                         </div>
                                         <!-- end col-lg-4 -->
@@ -132,7 +126,7 @@
                                                 <h3 class="title font-size-15 font-weight-medium">
                                                     Total flight time:<span
                                                     class="font-size-13 d-inline-block ms-1 text-gray"
-                                                >13 Hours 40 min</span
+                                                >{{ flight.formatted_dates['duration'] }}</span
                                                 >
                                                 </h3>
                                             </div>
@@ -151,7 +145,7 @@
                                                     <h3 class="title font-size-15 font-weight-medium">
                                                         Airline
                                                     </h3>
-                                                    <span class="font-size-13">Delta</span>
+                                                    <span class="font-size-13">{{ flight.airline.name }}</span>
                                                 </div>
                                             </div>
                                             <!-- end single-tour-feature -->
@@ -168,109 +162,13 @@
                                                 </div>
                                                 <div class="single-feature-titles">
                                                     <h3 class="title font-size-15 font-weight-medium">
-                                                        Flight Type
+                                                        Flight Class
                                                     </h3>
-                                                    <span class="font-size-13">Economy</span>
+                                                    <span class="font-size-13">{{ flight.destination_class.name }}</span>
                                                 </div>
                                             </div>
                                             <!-- end single-tour-feature -->
                                         </div>
-                                        <!-- end col-lg-4 -->
-                                        <div class="col-lg-4 responsive-column">
-                                            <div
-                                                class="single-tour-feature d-flex align-items-center mb-3"
-                                            >
-                                                <div
-                                                    class="single-feature-icon icon-element ms-0 flex-shrink-0 me-3"
-                                                >
-                                                    <i class="la la-refresh"></i>
-                                                </div>
-                                                <div class="single-feature-titles">
-                                                    <h3 class="title font-size-15 font-weight-medium">
-                                                        Fare Type
-                                                    </h3>
-                                                    <span class="font-size-13">Refundable</span>
-                                                </div>
-                                            </div>
-                                            <!-- end single-tour-feature -->
-                                        </div>
-                                        <!-- end col-lg-4 -->
-                                        <div class="col-lg-4 responsive-column">
-                                            <div
-                                                class="single-tour-feature d-flex align-items-center mb-3"
-                                            >
-                                                <div
-                                                    class="single-feature-icon icon-element ms-0 flex-shrink-0 me-3"
-                                                >
-                                                    <i class="la la-times"></i>
-                                                </div>
-                                                <div class="single-feature-titles">
-                                                    <h3 class="title font-size-15 font-weight-medium">
-                                                        Cancellation
-                                                    </h3>
-                                                    <span class="font-size-13">$78 / Person</span>
-                                                </div>
-                                            </div>
-                                            <!-- end single-tour-feature -->
-                                        </div>
-                                        <!-- end col-lg-4 -->
-                                        <div class="col-lg-4 responsive-column">
-                                            <div
-                                                class="single-tour-feature d-flex align-items-center mb-3"
-                                            >
-                                                <div
-                                                    class="single-feature-icon icon-element ms-0 flex-shrink-0 me-3"
-                                                >
-                                                    <i class="la la-exchange"></i>
-                                                </div>
-                                                <div class="single-feature-titles">
-                                                    <h3 class="title font-size-15 font-weight-medium">
-                                                        Flight Change
-                                                    </h3>
-                                                    <span class="font-size-13">$53 / Person</span>
-                                                </div>
-                                            </div>
-                                            <!-- end single-tour-feature -->
-                                        </div>
-                                        <!-- end col-lg-4 -->
-                                        <div class="col-lg-4 responsive-column">
-                                            <div
-                                                class="single-tour-feature d-flex align-items-center mb-3"
-                                            >
-                                                <div
-                                                    class="single-feature-icon icon-element ms-0 flex-shrink-0 me-3"
-                                                >
-                                                    <i class="la la-shopping-cart"></i>
-                                                </div>
-                                                <div class="single-feature-titles">
-                                                    <h3 class="title font-size-15 font-weight-medium">
-                                                        Seats & Baggage
-                                                    </h3>
-                                                    <span class="font-size-13">Extra Charge</span>
-                                                </div>
-                                            </div>
-                                            <!-- end single-tour-feature -->
-                                        </div>
-                                        <!-- end col-lg-4 -->
-                                        <div class="col-lg-4 responsive-column">
-                                            <div
-                                                class="single-tour-feature d-flex align-items-center mb-3"
-                                            >
-                                                <div
-                                                    class="single-feature-icon icon-element ms-0 flex-shrink-0 me-3"
-                                                >
-                                                    <i class="la la-gear"></i>
-                                                </div>
-                                                <div class="single-feature-titles">
-                                                    <h3 class="title font-size-15 font-weight-medium">
-                                                        Inflight Features
-                                                    </h3>
-                                                    <span class="font-size-13">Available</span>
-                                                </div>
-                                            </div>
-                                            <!-- end single-tour-feature -->
-                                        </div>
-                                        <!-- end col-lg-4 -->
                                         <div class="col-lg-4 responsive-column">
                                             <div
                                                 class="single-tour-feature d-flex align-items-center mb-3"
@@ -284,26 +182,7 @@
                                                     <h3 class="title font-size-15 font-weight-medium">
                                                         Base Fare
                                                     </h3>
-                                                    <span class="font-size-13">$320.00</span>
-                                                </div>
-                                            </div>
-                                            <!-- end single-tour-feature -->
-                                        </div>
-                                        <!-- end col-lg-4 -->
-                                        <div class="col-lg-4 responsive-column">
-                                            <div
-                                                class="single-tour-feature d-flex align-items-center mb-3"
-                                            >
-                                                <div
-                                                    class="single-feature-icon icon-element ms-0 flex-shrink-0 me-3"
-                                                >
-                                                    <i class="la la-money"></i>
-                                                </div>
-                                                <div class="single-feature-titles">
-                                                    <h3 class="title font-size-15 font-weight-medium">
-                                                        Taxes & Fees
-                                                    </h3>
-                                                    <span class="font-size-13">$300.00</span>
+                                                    <span class="font-size-13">KES {{ flight.current_price }}</span>
                                                 </div>
                                             </div>
                                             <!-- end single-tour-feature -->
@@ -325,11 +204,10 @@
                             <div class="sidebar-widget single-content-widget">
                                 <div class="sidebar-widget-item">
                                     <div class="sidebar-book-title-wrap mb-3">
-                                        <h3>Popular</h3>
+                                        <h3>Book Now</h3>
                                         <p>
-                        <span class="text-form">From</span
-                        ><span class="text-value ms-2 me-1">$399.00</span>
-                                            <span class="before-price">$412.00</span>
+                        <span class="text-form">Total Due</span
+                        ><span class="text-value ms-2 me-1">KES {{ no_of_tickets * flight.current_price }}</span>
                                         </p>
                                     </div>
                                 </div>
@@ -340,99 +218,29 @@
                                             <div class="input-box">
                                                 <label class="label-text">Date</label>
                                                 <div class="form-group">
-                                                    <span class="la la-calendar form-icon"></span>
+                                                    <span class="la la-user form-icon"></span>
                                                     <input
-                                                        class="date-range form-control"
-                                                        type="text"
-                                                        name="daterange-single"
+                                                        class="form-control"
+                                                        type="number"
+                                                        min="1"
+                                                        placeholder="Enter the number of tickets"
+                                                        v-model="no_of_tickets"
                                                     />
-                                                </div>
-                                            </div>
-                                            <div class="input-box">
-                                                <label class="label-text">Preferred class</label>
-                                                <div class="form-group select2-container-wrapper">
-                                                    <div class="select-contain w-auto">
-                                                        <select class="select-contain-select">
-                                                            <option value="first">First class</option>
-                                                            <option value="business">Business</option>
-                                                            <option value="premium">Premium economy</option>
-                                                            <option value="">Economy/Coach</option>
-                                                        </select>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                                 <!-- end sidebar-widget-item -->
-                                <div class="sidebar-widget-item">
-                                    <div
-                                        class="qty-box mb-2 d-flex align-items-center justify-content-between"
-                                    >
-                                        <label class="font-size-16"
-                                        >Adults <span>Age 18+</span></label
-                                        >
-                                        <div class="qtyBtn d-flex align-items-center">
-                                            <div class="qtyDec"><i class="la la-minus"></i></div>
-                                            <input type="text" name="qtyInput" value="0" />
-                                            <div class="qtyInc"><i class="la la-plus"></i></div>
-                                        </div>
-                                    </div>
-                                    <!-- end qty-box -->
-                                    <div
-                                        class="qty-box mb-2 d-flex align-items-center justify-content-between"
-                                    >
-                                        <label class="font-size-16"
-                                        >Children <span>2-12 years old</span></label
-                                        >
-                                        <div class="qtyBtn d-flex align-items-center">
-                                            <div class="qtyDec"><i class="la la-minus"></i></div>
-                                            <input type="text" name="qtyInput" value="0" />
-                                            <div class="qtyInc"><i class="la la-plus"></i></div>
-                                        </div>
-                                    </div>
-                                    <!-- end qty-box -->
-                                    <div
-                                        class="qty-box mb-2 d-flex align-items-center justify-content-between"
-                                    >
-                                        <label class="font-size-16"
-                                        >Infants <span>0-2 years old</span></label
-                                        >
-                                        <div class="qtyBtn d-flex align-items-center">
-                                            <div class="qtyDec"><i class="la la-minus"></i></div>
-                                            <input type="text" name="qtyInput" value="0" />
-                                            <div class="qtyInc"><i class="la la-plus"></i></div>
-                                        </div>
-                                    </div>
-                                    <!-- end qty-box -->
-                                </div>
-                                <!-- end sidebar-widget-item -->
                                 <div class="btn-box pt-2">
-                                    <a
-                                        href="flight-booking.html"
+                                    <button @click.prevent="bookNow"
                                         class="theme-btn text-center w-100 mb-2"
                                     ><i class="la la-shopping-cart me-2 font-size-18"></i>Book
-                                        Now</a
-                                    >
-                                    <a
-                                        href="#"
-                                        class="theme-btn text-center w-100 theme-btn-transparent"
-                                    ><i class="la la-heart-o me-2"></i>Add to Wishlist</a
+                                        Now</button
                                     >
                                     <div
                                         class="d-flex align-items-center justify-content-between pt-2"
                                     >
-                                        <a
-                                            href="#"
-                                            class="btn theme-btn-hover-gray font-size-15"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#sharePopupForm"
-                                        ><i class="la la-share me-1"></i>Share</a
-                                        >
-                                        <p>
-                                            <i class="la la-eye me-1 font-size-15 color-text-2"></i
-                                            >3456
-                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -453,258 +261,88 @@
 ================================= -->
 
     <div class="section-block"></div>
-
-    <!-- ================================
-    START RELATE TOUR AREA
-================================= -->
-    <section class="related-tour-area section--padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-heading text-center">
-                        <h2 class="sec__title">You might also like</h2>
-                    </div>
-                    <!-- end section-heading -->
-                </div>
-                <!-- end col-lg-12 -->
-            </div>
-            <!-- end row -->
-            <div class="row padding-top-50px">
-                <div class="col-lg-4 responsive-column">
-                    <div class="card-item flight-card flight--card">
-                        <div class="card-img">
-                            <img src="images/airline-img7.png" alt="flight-logo-img" />
-                        </div>
-                        <div class="card-body">
-                            <div class="card-top-title d-flex justify-content-between">
-                                <div>
-                                    <h3 class="card-title font-size-17">Beijing</h3>
-                                    <p class="card-meta font-size-14">One way flight</p>
-                                </div>
-                                <div>
-                                    <div class="text-end">
-                      <span class="font-weight-regular font-size-14 d-block"
-                      >avg/person</span
-                      >
-                                        <h6 class="font-weight-bold color-text">$350.00</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end card-top-title -->
-                            <div class="flight-details py-3">
-                                <div class="flight-time pb-3">
-                                    <div class="flight-time-item take-off d-flex">
-                                        <div class="flex-shrink-0 me-2">
-                                            <i class="la la-plane"></i>
-                                        </div>
-                                        <div>
-                                            <h3
-                                                class="card-title font-size-15 font-weight-medium mb-0"
-                                            >
-                                                Take off
-                                            </h3>
-                                            <p class="card-meta font-size-14">Wed Nov 12 6:50 AM</p>
-                                        </div>
-                                    </div>
-                                    <div class="flight-time-item landing d-flex">
-                                        <div class="flex-shrink-0 me-2">
-                                            <i class="la la-plane"></i>
-                                        </div>
-                                        <div>
-                                            <h3
-                                                class="card-title font-size-15 font-weight-medium mb-0"
-                                            >
-                                                Landing
-                                            </h3>
-                                            <p class="card-meta font-size-14">Thu Nov 13 8:50 AM</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end flight-time -->
-                                <p class="font-size-14 text-center">
-                                    <span class="color-text-2 me-1">Total Time:</span>12 Hours
-                                    30 Minutes
-                                </p>
-                            </div>
-                            <!-- end flight-details -->
-                            <div class="btn-box text-center">
-                                <a
-                                    href="flight-single.html"
-                                    class="theme-btn theme-btn-small w-100"
-                                >View Details</a
-                                >
-                            </div>
-                        </div>
-                        <!-- end card-body -->
-                    </div>
-                    <!-- end card-item -->
-                </div>
-                <!-- end col-lg-4 -->
-                <div class="col-lg-4 responsive-column">
-                    <div class="card-item flight-card flight--card">
-                        <div class="card-img">
-                            <img src="images/airline-img8.png" alt="flight-logo-img" />
-                        </div>
-                        <div class="card-body">
-                            <div class="card-top-title d-flex justify-content-between">
-                                <div>
-                                    <h3 class="card-title font-size-17">Paris</h3>
-                                    <p class="card-meta font-size-14">Round flight</p>
-                                </div>
-                                <div>
-                                    <div class="text-end">
-                      <span class="font-weight-regular font-size-14 d-block"
-                      >avg/person</span
-                      >
-                                        <h6 class="font-weight-bold color-text">$650.00</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end card-top-title -->
-                            <div class="flight-details py-3">
-                                <div class="flight-time pb-3">
-                                    <div class="flight-time-item take-off d-flex">
-                                        <div class="flex-shrink-0 me-2">
-                                            <i class="la la-plane"></i>
-                                        </div>
-                                        <div>
-                                            <h3
-                                                class="card-title font-size-15 font-weight-medium mb-0"
-                                            >
-                                                Take off
-                                            </h3>
-                                            <p class="card-meta font-size-14">Wed Nov 12 6:50 AM</p>
-                                        </div>
-                                    </div>
-                                    <div class="flight-time-item landing d-flex">
-                                        <div class="flex-shrink-0 me-2">
-                                            <i class="la la-plane"></i>
-                                        </div>
-                                        <div>
-                                            <h3
-                                                class="card-title font-size-15 font-weight-medium mb-0"
-                                            >
-                                                Landing
-                                            </h3>
-                                            <p class="card-meta font-size-14">Thu Nov 13 8:50 AM</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end flight-time -->
-                                <p class="font-size-14 text-center">
-                                    <span class="color-text-2 me-1">Total Time:</span>12 Hours
-                                    30 Minutes
-                                </p>
-                            </div>
-                            <!-- end flight-details -->
-                            <div class="btn-box text-center">
-                                <a
-                                    href="flight-single.html"
-                                    class="theme-btn theme-btn-small w-100"
-                                >View Details</a
-                                >
-                            </div>
-                        </div>
-                        <!-- end card-body -->
-                    </div>
-                    <!-- end card-item -->
-                </div>
-                <!-- end col-lg-4 -->
-                <div class="col-lg-4 responsive-column">
-                    <div class="card-item flight-card flight--card">
-                        <div class="card-img">
-                            <img src="images/airline-img9.png" alt="flight-logo-img" />
-                        </div>
-                        <div class="card-body">
-                            <div class="card-top-title d-flex justify-content-between">
-                                <div>
-                                    <h3 class="card-title font-size-17">Dubai</h3>
-                                    <p class="card-meta font-size-14">One way flight</p>
-                                </div>
-                                <div>
-                                    <div class="text-end">
-                      <span class="font-weight-regular font-size-14 d-block"
-                      >avg/person</span
-                      >
-                                        <h6 class="font-weight-bold color-text">$350.00</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end card-top-title -->
-                            <div class="flight-details py-3">
-                                <div class="flight-time pb-3">
-                                    <div class="flight-time-item take-off d-flex">
-                                        <div class="flex-shrink-0 me-2">
-                                            <i class="la la-plane"></i>
-                                        </div>
-                                        <div>
-                                            <h3
-                                                class="card-title font-size-15 font-weight-medium mb-0"
-                                            >
-                                                Take off
-                                            </h3>
-                                            <p class="card-meta font-size-14">Wed Nov 12 6:50 AM</p>
-                                        </div>
-                                    </div>
-                                    <div class="flight-time-item landing d-flex">
-                                        <div class="flex-shrink-0 me-2">
-                                            <i class="la la-plane"></i>
-                                        </div>
-                                        <div>
-                                            <h3
-                                                class="card-title font-size-15 font-weight-medium mb-0"
-                                            >
-                                                Landing
-                                            </h3>
-                                            <p class="card-meta font-size-14">Thu Nov 13 8:50 AM</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end flight-time -->
-                                <p class="font-size-14 text-center">
-                                    <span class="color-text-2 me-1">Total Time:</span>12 Hours
-                                    30 Minutes
-                                </p>
-                            </div>
-                            <!-- end flight-details -->
-                            <div class="btn-box text-center">
-                                <a
-                                    href="flight-single.html"
-                                    class="theme-btn theme-btn-small w-100"
-                                >View Details</a
-                                >
-                            </div>
-                        </div>
-                        <!-- end card-body -->
-                    </div>
-                    <!-- end card-item -->
-                </div>
-                <!-- end col-lg-4 -->
-            </div>
-            <!-- end row -->
-        </div>
-        <!-- end container -->
-    </section>
-    <!-- end related-tour-area -->
-    <!-- ================================
-    END RELATE TOUR AREA
-================================= -->
 </template>
-<script setup lang="ts">
+<script setup>
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
+import {useRoute} from "vue-router";
 
-const destinations = ref([]);
-const flights = ref([]);
+const route = useRoute();
 
+const flight = ref(
+    {
+        "id": 2,
+        "name": null,
+        "destination_id": 1,
+        "destination_class_id": 1,
+        "airline_id": 1,
+        "flight_type": "One Way",
+        "no_of_passengers": 1,
+        "current_price": "400.00",
+        "departure": "2024-06-17T19:14:00.000000Z",
+        "arrival": "2024-06-18T05:15:00.000000Z",
+        "status": "Active",
+        "extras": null,
+        "created_at": "2024-06-17T16:14:43.000000Z",
+        "updated_at": "2024-06-17T16:14:43.000000Z",
+        "deleted_at": null,
+        "discount": 20,
+        "formatted_dates": {
+            "departure": "17 Jun 2024, 7:14 pm",
+            "arrival": "18 Jun 2024, 5:15 am"
+        },
+        "destination": {
+            "id": 1,
+            "name": "Maasai Mara",
+            "description": "Famous for the Great Migration",
+            "landmark": "Maasai Mara National Reserve",
+            "price": "0.00",
+            "current_price": "0.00",
+            "status": "Active",
+            "extras": null,
+            "created_at": "2024-06-17T14:38:31.000000Z",
+            "updated_at": "2024-06-17T14:38:31.000000Z",
+            "deleted_at": null,
+            "media_url": null,
+            "media": [
+
+            ]
+        },
+        "destination_class": {
+            "id": 1,
+            "destination_id": 1,
+            "name": "First Class",
+            "price": "500.00",
+            "status": "Active",
+            "extras": null,
+            "created_at": "2024-06-17T14:39:25.000000Z",
+            "updated_at": "2024-06-17T14:39:25.000000Z",
+            "deleted_at": null
+        },
+        "airline": {
+            "id": 1,
+            "name": "Airline",
+            "description": "Description",
+            "capacity": 500,
+            "status": "Active",
+            "extras": null,
+            "created_at": "2024-06-17T14:39:01.000000Z",
+            "updated_at": "2024-06-17T14:39:01.000000Z"
+        }
+    }
+);
+
+const no_of_tickets = ref(0);
+
+const bookNow = () =>{
+    alert('yes bana');
+}
 onMounted(async () => {
     try {
-        const response = await axios.get('/api/guest/destinations');
-        const response1 = await axios.get('/api/guest/active_flights');
-        destinations.value = response.data.destinations;
-        flights.value = response1.data.flights;
+        const response = await axios.get('/api/guest/active_flights/'+route.params.id);
+        flight.value = response.data.flight;
     } catch (error) {
-        console.error('Error fetching destinations:', error);
+        console.error('Error fetching flight:', error);
     }
 });
 </script>
