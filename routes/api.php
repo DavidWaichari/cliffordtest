@@ -8,6 +8,11 @@ Route::middleware('auth:sanctum')->group(function () {
         return response()->json(['success' => true, 'user' => $request->user()]);
     });
     Route::post('/auth/logout',[\App\Http\Controllers\AuthController::class, 'logout']);
+
+    //user
+    Route::prefix('user')->group(function (){
+        Route::resource('/booking', \App\Http\Controllers\User\BookingController::class);
+    });
 });
 
 Route::prefix('auth')->group(function (){
@@ -28,6 +33,3 @@ Route::prefix('guest')->group(function () {
     Route::get('active_flights/{id}', [\App\Http\Controllers\GuestController::class, 'fetchFlightDetails']);
 });
 
-Route::prefix('user')->group(function (){
-
-});

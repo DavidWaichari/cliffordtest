@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
@@ -22,11 +23,12 @@ class BookingController extends Controller
 
     public function store(Request $request)
     {
+
         $request->validate([
             'flight_id' => 'required|integer',
             'no_of_tickets' => 'required|integer',
         ]);
-        $request['user_id'] = 1; //update this to auth user
+        $request['user_id'] = Auth::user()->id; //update this to auth user
 
         $booking = Booking::create($request->all());
 

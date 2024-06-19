@@ -224,6 +224,9 @@ export default {
 
         const logout = async () => {
             await authStore.logout();
+            //call logout api
+            await axios.post('/api/auth/logout');
+
             router.push('/login');
         };
 

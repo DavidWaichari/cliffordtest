@@ -207,7 +207,7 @@
                                         <h3>Book Now</h3>
                                         <p>
                         <span class="text-form">Total Due</span
-                        ><span class="text-value ms-2 me-1">KES {{ no_of_tickets * flight.current_price }}</span>
+                        ><span class="text-value ms-2 me-1">KES {{ form.no_of_tickets * flight.current_price }}</span>
                                         </p>
                                     </div>
                                 </div>
@@ -224,7 +224,7 @@
                                                         type="number"
                                                         min="1"
                                                         placeholder="Enter the number of tickets"
-                                                        v-model="no_of_tickets"
+                                                        v-model="form.no_of_tickets"
                                                     />
                                                 </div>
                                             </div>
@@ -268,6 +268,11 @@ import { ref, onMounted } from 'vue';
 import {useRoute} from "vue-router";
 
 const route = useRoute();
+
+const form = ref({
+    flight_id: route.params.id,
+    no_of_tickets: 0
+});
 
 const flight = ref(
     {
@@ -332,10 +337,9 @@ const flight = ref(
     }
 );
 
-const no_of_tickets = ref(0);
 
-const bookNow = () =>{
-    alert('yes bana');
+const bookNow = async () =>{
+    const response = await  axios.post('/api/user/booking', form.value);
 }
 onMounted(async () => {
     try {
