@@ -31,5 +31,6 @@ Route::prefix('guest')->group(function () {
     Route::get('destinations', [\App\Http\Controllers\GuestController::class, 'destinations']);
     Route::get('active_flights', [\App\Http\Controllers\GuestController::class, 'flights']);
     Route::get('active_flights/{id}', [\App\Http\Controllers\GuestController::class, 'fetchFlightDetails']);
+    Route::get('search_flights', [\App\Http\Controllers\GuestController::class, 'searchFlights']);
 });
 

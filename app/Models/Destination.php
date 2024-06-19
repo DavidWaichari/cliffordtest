@@ -31,4 +31,9 @@ public function getMediaUrlAttribute()
 $media = $this->getFirstMedia('images');
 return $media ? $media->getUrl() : null;
 }
+
+public function flights()
+{
+    return $this->hasMany(Flight::class, 'destination_id');
+}
 }
