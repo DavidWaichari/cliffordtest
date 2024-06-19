@@ -74,7 +74,7 @@
                                             <a href="#" style="background-color: white">Destinations</a>
                                         </li>
                                         <li>
-                                            <a href="#" style="background-color: white">My Bookings</a>
+                                            <router-link to="/admin" style="background-color: white">Admin</router-link>
                                         </li>
                                     </ul>
                                 </nav>

@@ -696,6 +696,19 @@
                                                     <div
                                                         class="list-group drop-reveal-list user-drop-reveal-list"
                                                     >
+                                                        <router-link
+                                                            to="/"
+                                                            class="list-group-item list-group-item-action"
+                                                        >
+                                                            <div class="msg-body">
+                                                                <div class="msg-content">
+                                                                    <h3 class="title">
+                                                                        <i class="la la-user me-2"></i> Back to Homepage
+                                                                    </h3>
+                                                                </div>
+                                                            </div>
+                                                            <!-- end msg-body -->
+                                                        </router-link>
                                                         <a
                                                             href="admin-dashboard-settings.html"
                                                             class="list-group-item list-group-item-action"
