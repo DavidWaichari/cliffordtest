@@ -89,7 +89,7 @@
                                                 <label class="label-text">Flight Type</label>
                                                 <div class="form-group">
                                                     <select v-model="searchParams.flightType" class="form-select" style="height: 50px;">
-                                                        <option value="">One Way</option>
+                                                        <option value="">Select</option>
                                                         <option value="One Way">One Way</option>
                                                         <option value="Round Trip">Round Trip</option>
                                                     </select>
@@ -102,6 +102,7 @@
                                                 <label class="label-text">Destination</label>
                                                 <div class="form-group">
                                                     <select v-model="searchParams.destination" class="form-select" style="height: 50px;">
+                                                        <option value="">Select</option>
                                                         <option v-for="destination in destinations" :key="destination.id" :value="destination.name">{{ destination.name }}</option>
                                                     </select>
                                                     <div class="invalid-feedback">Please provide a flight type name.</div>
@@ -133,6 +134,7 @@
                                                 <label class="label-text">Travel Class</label>
                                                 <div class="form-group select2-container-wrapper select-contain select-contain-shadow w-auto">
                                                     <select v-model="searchParams.travelClass" class="form-select"  name="name" style="height: 50px">
+                                                        <option value="">Select</option>
                                                         <option value="First Class">First Class</option>
                                                         <option value="Business">Business</option>
                                                         <option value="Economy">Economy</option>
@@ -142,7 +144,7 @@
                                         </div>
                                         <div class="col-lg-3">
                                             <button type="submit" class="theme-btn w-100 text-center margin-top-20px" v-if="!is_searching">Search Now</button>
-                                            <button type="button" @click.prevent="stopSearching" class="theme-btn w-100 text-center margin-top-20px" v-if="is_searching">Reset Search</button>
+                                            <button type="button" @click.prevent="stopSearching" class="theme-btn w-100 text-center margin-top-20px" v-if="is_searching">Stop Searching</button>
                                         </div>
                                     </form>
                                 </div>
@@ -169,7 +171,7 @@
                 <div class="col-lg-12">
                     <div class="section-heading text-center">
                         <h2 class="sec__title" v-if="!is_searching">Featured Flight Deals</h2>
-                        <h2 class="sec__title" v-if="is_searching">{{ flights.length }} Flights found</h2>
+                        <h2 class="sec__title" v-if="is_searching">{{ flights.length }} Flight results</h2>
                     </div>
                     <!-- end section-heading -->
                 </div>
@@ -313,8 +315,14 @@ const searchFlights = async () => {
     }
 };
 
-const stopSearching = async () =>{
-    is_searching.value =false;
+const stopSearching = async() => {
+    is_searching.value = false;
+    searchParams.value.flightType = '';
+    searchParams.value.destination = '';
+    searchParams.value.departure = '';
+    searchParams.value.arrival = '';
+    searchParams.value.travelClass = '';
+
     try {
         const response = await axios.get('/api/guest/destinations');
         const response1 = await axios.get('/api/guest/active_flights');
