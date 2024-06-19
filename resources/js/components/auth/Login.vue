@@ -58,8 +58,10 @@
 import { ref } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
+import { useAuthStore } from '../../store.js';
 
 const router = useRouter();
+const authStore = useAuthStore();
 
 const form = ref({
     email: '',
@@ -82,6 +84,10 @@ const login = async () => {
 
         // Save the token in local storage
         localStorage.setItem('auth_token', token);
+
+        // Update auth store
+        authStore.setToken(token);
+        authStore.setUser(user);
 
         // Handle successful login, e.g., redirect, show success message, etc.
         router.push('/');
