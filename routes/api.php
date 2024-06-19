@@ -10,8 +10,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/auth/logout',[\App\Http\Controllers\AuthController::class, 'logout']);
 
     //user
-    Route::prefix('user')->group(function (){
+    Route::prefix('/user')->group(function (){
         Route::resource('/booking', \App\Http\Controllers\User\BookingController::class);
+        Route::get('/user_has_booked/{flight_id}',[\App\Http\Controllers\User\BookingController::class, 'userHasBookedFlight']);
     });
 });
 

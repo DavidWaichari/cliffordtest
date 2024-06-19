@@ -340,6 +340,7 @@ const flight = ref(
 
 const bookNow = async () =>{
     const response = await  axios.post('/api/user/booking', form.value);
+    const res2 = await axios.get('/api/user/user_has_booked'+route.params.id);
 }
 onMounted(async () => {
     try {

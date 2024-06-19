@@ -15,21 +15,19 @@ import AirlinesIndex from './components/admin/airlines/Index.vue';
 import AirlinesCreate from './components/admin/airlines/Create.vue';
 import AirlinesEdit from './components/admin/airlines/Edit.vue';
 
-//user
+// user
 import UserLayout from './components/layouts/User.vue'
 import Homepage from './components/user/Homepage.vue'
 import FlightDetails from './components/user/flights/Details.vue'
-//authentication
 
+// authentication
 import Login from './components/auth/Login.vue';
 import Register from './components/auth/Register.vue';
 
-
-
 const routes = [
     {
-      path:'/',
-      component: UserLayout,
+        path: '/',
+        component: UserLayout,
         children: [
             {
                 path: '',
@@ -50,9 +48,10 @@ const routes = [
         ]
     },
     {
-        path:'/admin',
+        path: '/admin',
         component: AdminLayout,
-        children:[
+        meta: { requiresAuth: true },  // Protect all admin routes
+        children: [
             {
                 path: '',
                 redirect: 'admin/dashboard',
@@ -60,69 +59,91 @@ const routes = [
             {
                 path: 'dashboard',
                 component: AdminDashboard,
+                meta: { requiresAuth: true }
             },
             {
                 path: 'bookings',
                 component: BookingsIndex,
+                meta: { requiresAuth: true }
             },
             {
                 path: 'flights',
                 component: FlightIndex,
+                meta: { requiresAuth: true }
             },
             {
-                path:'flights/create',
-                component:FlightCreate
+                path: 'flights/create',
+                component: FlightCreate,
+                meta: { requiresAuth: true }
             },
             {
-                path:'flights/:id/edit',
-                component:FlightEdit
+                path: 'flights/:id/edit',
+                component: FlightEdit,
+                meta: { requiresAuth: true }
             },
             {
-                path:'destinations',
-                component: Destinations
+                path: 'destinations',
+                component: Destinations,
+                meta: { requiresAuth: true }
             },
             {
-                path:'destinations/create',
-                component: DestinationsCreate
+                path: 'destinations/create',
+                component: DestinationsCreate,
+                meta: { requiresAuth: true }
             },
             {
-                path:'destinations/:id/edit',
-                component: DestinationsEdit
+                path: 'destinations/:id/edit',
+                component: DestinationsEdit,
+                meta: { requiresAuth: true }
             },
             {
-                path:'destination_classes',
-                component: DestinationClasses
+                path: 'destination_classes',
+                component: DestinationClasses,
+                meta: { requiresAuth: true }
             },
             {
-                path:'destination_classes/create',
-                component: DestinationsClassesCreate
+                path: 'destination_classes/create',
+                component: DestinationsClassesCreate,
+                meta: { requiresAuth: true }
             },
             {
-                path:'destination_classes/:id/edit',
-                component: DestinationsClassesEdit
+                path: 'destination_classes/:id/edit',
+                component: DestinationsClassesEdit,
+                meta: { requiresAuth: true }
             },
             {
-                path:'airlines',
-                component: AirlinesIndex
+                path: 'airlines',
+                component: AirlinesIndex,
+                meta: { requiresAuth: true }
             },
             {
-                path:'airlines/create',
-                component: AirlinesCreate
+                path: 'airlines/create',
+                component: AirlinesCreate,
+                meta: { requiresAuth: true }
             },
             {
-                path:'airlines/:id/edit',
-                component: AirlinesEdit
+                path: 'airlines/:id/edit',
+                component: AirlinesEdit,
+                meta: { requiresAuth: true }
             },
-
         ]
     }
-
     // Add other routes as needed
 ];
 
 const router = createRouter({
     history: createWebHistory(),
     routes,
+});
+
+// Global navigation guard to check for authentication
+router.beforeEach((to, from, next) => {
+    const isAuthenticated = !!localStorage.getItem('auth_token'); // Check if token exists in localStorage
+    if (to.matched.some(record => record.meta.requiresAuth) && !isAuthenticated) {
+        next('/login'); // Redirect to login page if not authenticated
+    } else {
+        next(); // Proceed to the route
+    }
 });
 
 export default router;

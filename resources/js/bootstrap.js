@@ -26,6 +26,8 @@ if (token) {
             // Optionally, clear the invalid token from localStorage
             localStorage.removeItem('auth_token');
         });
+}else {
+
 }
 
 // Example setup for Echo (if you need it)

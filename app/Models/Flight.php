@@ -96,4 +96,5 @@ class Flight extends Model
             'duration' => "{$hours}H {$minutes}M",
         ];
     }
+
 }

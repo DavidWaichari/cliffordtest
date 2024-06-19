@@ -63,4 +63,13 @@ class BookingController extends Controller
 
         return response()->json(['success' => true, 'message' => 'Booking deleted successfully']);
     }
+
+    public function userHasBookedFlight($flightId)
+    {
+        $booking = Booking::where('user_id', Auth::user()->id)->where('flight_id', $flightId)->first();
+        if($booking){
+            return response()->json(['success' => true, 'message' => 'User has voted']);
+        }
+        return response()->json(['success' => false, 'message' => 'User  has not voted']);
+    }
 }
