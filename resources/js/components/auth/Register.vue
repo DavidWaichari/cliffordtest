@@ -49,7 +49,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import axios from 'axios';
+import {useRouter} from "vue-router";
 
+const router = useRouter();
 const form = ref({
     name: '',
     email: '',
@@ -68,7 +70,7 @@ const register = async () => {
     try {
         const response = await axios.post('/api/auth/register', form.value);
         if (response.data.success) {
-            alert('Registration successful');
+            router.push('/login');
         }
     } catch (error) {
         if (error.response && error.response.data.errors) {

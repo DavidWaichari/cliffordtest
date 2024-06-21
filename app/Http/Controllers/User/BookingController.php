@@ -29,7 +29,7 @@ class BookingController extends Controller
             'no_of_tickets' => 'required|integer',
         ]);
         $request['user_id'] = Auth::user()->id; //update this to auth user
-
+        $request['status'] = "Pending";
         $booking = Booking::create($request->all());
 
         return response()->json(['success' => true, 'message' => 'Booking created successfully', 'booking' => $booking]);

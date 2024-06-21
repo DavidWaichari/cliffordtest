@@ -32,8 +32,8 @@
                            <div class="icon-box icon-layout-2 dashboard-icon-box pb-0">
                                <div class="d-flex pb-3 justify-content-between">
                                    <div class="info-content">
-                                       <p class="info__desc">Total Booking!</p>
-                                       <h4 class="info__title">55</h4>
+                                       <p class="info__desc">Bookings</p>
+                                       <h4 class="info__title">{{ data.bookings }}</h4>
                                    </div>
                                    <!-- end info-content -->
                                    <div class="info-icon icon-element bg-4">
@@ -42,11 +42,11 @@
                                    <!-- end info-icon-->
                                </div>
                                <div class="section-block"></div>
-                               <a
-                                   href="admin-dashboard-booking.html"
+                               <router-link
+                                   to="/admin/bookings"
                                    class="d-flex align-items-center justify-content-between view-all"
                                >View All <i class="la la-angle-right"></i
-                               ></a>
+                               ></router-link>
                            </div>
                        </div>
                        <!-- end col-lg-3 -->
@@ -54,8 +54,8 @@
                            <div class="icon-box icon-layout-2 dashboard-icon-box pb-0">
                                <div class="d-flex pb-3 justify-content-between">
                                    <div class="info-content">
-                                       <p class="info__desc">New Reviews!</p>
-                                       <h4 class="info__title">22</h4>
+                                       <p class="info__desc">Flights</p>
+                                       <h4 class="info__title">{{ data.flights }}</h4>
                                    </div>
                                    <!-- end info-content -->
                                    <div class="info-icon icon-element bg-3">
@@ -64,11 +64,11 @@
                                    <!-- end info-icon-->
                                </div>
                                <div class="section-block"></div>
-                               <a
-                                   href="admin-dashboard-reviews.html"
+                               <router-link
+                                   to="/admin/flights"
                                    class="d-flex align-items-center justify-content-between view-all"
                                >View All <i class="la la-angle-right"></i
-                               ></a>
+                               ></router-link>
                            </div>
                        </div>
                        <!-- end col-lg-3 -->
@@ -76,8 +76,8 @@
                            <div class="icon-box icon-layout-2 dashboard-icon-box pb-0">
                                <div class="d-flex pb-3 justify-content-between">
                                    <div class="info-content">
-                                       <p class="info__desc">Total Subscribers!</p>
-                                       <h4 class="info__title">27</h4>
+                                       <p class="info__desc">Destinations</p>
+                                       <h4 class="info__title">{{ data.destinations }}</h4>
                                    </div>
                                    <!-- end info-content -->
                                    <div class="info-icon icon-element bg-2">
@@ -86,11 +86,11 @@
                                    <!-- end info-icon-->
                                </div>
                                <div class="section-block"></div>
-                               <a
-                                   href="admin-dashboard-subscribers.html"
+                               <router-link
+                                   to="/admin/destinations"
                                    class="d-flex align-items-center justify-content-between view-all"
                                >View All <i class="la la-angle-right"></i
-                               ></a>
+                               ></router-link>
                            </div>
                        </div>
                        <!-- end col-lg-3 -->
@@ -98,8 +98,8 @@
                            <div class="icon-box icon-layout-2 dashboard-icon-box pb-0">
                                <div class="d-flex pb-3 justify-content-between">
                                    <div class="info-content">
-                                       <p class="info__desc">New Bookmarks!</p>
-                                       <h4 class="info__title">25</h4>
+                                       <p class="info__desc">Airlines</p>
+                                       <h4 class="info__title">{{ data.airlines }}</h4>
                                    </div>
                                    <!-- end info-content -->
                                    <div class="info-icon icon-element bg-1">
@@ -108,11 +108,11 @@
                                    <!-- end info-icon-->
                                </div>
                                <div class="section-block"></div>
-                               <a
-                                   href="admin-dashboard-wishlist.html"
+                               <router-link
+                                   to="/admin/airlines"
                                    class="d-flex align-items-center justify-content-between view-all"
                                >View All <i class="la la-angle-right"></i
-                               ></a>
+                               ></router-link>
                            </div>
                        </div>
                        <!-- end col-lg-3 -->
@@ -136,4 +136,13 @@
    </template>
    <script setup>
    import Footer from './shared/Footer.vue'
+   import {onMounted, ref} from "vue";
+   import axios from "axios";
+
+   const data = ref([]);
+
+   onMounted(async() => {
+      const response  = await axios.get('/api/admin/dashboard');
+       data.value = response.data.data
+   });
    </script>

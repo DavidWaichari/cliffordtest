@@ -123,7 +123,7 @@ import axios from 'axios';
 import { useRouter } from 'vue-router';
 import { Header, Item } from 'vue3-easy-data-table';
 
-const searchField = ['name', 'description', 'landmark'];
+const searchField = ['name', 'destination'];
 const searchValue = ref('');
 
 const headers: Header[] = [

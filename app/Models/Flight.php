@@ -42,8 +42,12 @@ class Flight extends Model
 
     protected $appends = [
         'discount',
-        'formatted_dates'
+        'formatted_dates',
+        'destination',
+        'airline',
+        'destination_class'
     ];
+
     /**
      * Get the destination associated with the flight.
      */
@@ -97,4 +101,18 @@ class Flight extends Model
         ];
     }
 
+    public function getDestinationAttribute()
+    {
+        return $this->destination()->first();
+    }
+
+    public function getAirlineAttribute()
+    {
+        return $this->airline()->first();
+    }
+
+    public function getDestinationClassAttribute()
+    {
+        return $this->destinationClass()->first();
+    }
 }

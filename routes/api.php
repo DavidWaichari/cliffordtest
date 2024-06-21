@@ -26,6 +26,8 @@ Route::prefix('admin')->group(function () {
     Route::apiResource('/destination_classes',\App\Http\Controllers\Admin\DestinationClassController::class);
     Route::apiResource('/airlines',\App\Http\Controllers\Admin\AirlineController::class);
     Route::apiResource('/flights',\App\Http\Controllers\Admin\FlightController::class);
+    Route::get('/bookings',[\App\Http\Controllers\Admin\DashboardController::class, 'bookings']);
+    Route::get('/dashboard',[\App\Http\Controllers\Admin\DashboardController::class, 'index']);
 });
 
 Route::prefix('guest')->group(function () {

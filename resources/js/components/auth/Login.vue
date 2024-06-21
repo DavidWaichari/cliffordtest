@@ -96,7 +96,7 @@ const login = async () => {
         if (err.response && err.response.data.message) {
             error.value = err.response.data.message;  // Set error message to display
         } else {
-            error.value = 'An unknown error occurred. Please try again.';
+            error.value = 'Invalid credentials or user not found';
         }
     }
 };
