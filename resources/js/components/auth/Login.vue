@@ -8,7 +8,7 @@
                         <p class="card-subtitle mb-2 text-muted text-center">Hello! Welcome to your account</p>
                     </div>
                     <div class="card-body">
-                        <form @submit.prevent="login">
+                        <form @submit.prevent="login" method="post">
                             <!-- Display error message -->
                             <div v-if="error" class="alert alert-danger">
                                 {{ error }}
@@ -56,12 +56,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import axios from 'axios';
 import { useRouter } from 'vue-router';
-import { useAuthStore } from '../../store.js';
+import { useStore } from 'vuex';
 
 const router = useRouter();
-const authStore = useAuthStore();
+const store = useStore();
 
 const form = ref({
     email: '',
@@ -74,30 +73,16 @@ const error = ref('');
 const login = async () => {
     error.value = '';  // Clear any previous errors
     try {
-        const response = await axios.post('/api/auth/login', {
+        await store.dispatch('login', {
             email: form.value.email,
             password: form.value.password,
         });
-
-        const token = response.data.token;
-        const user = response.data.user;
-
-        // Save the token in local storage
-        localStorage.setItem('auth_token', token);
-
-        // Update auth store
-        authStore.setToken(token);
-        authStore.setUser(user);
-
-        // Handle successful login, e.g., redirect, show success message, etc.
         router.push('/');
     } catch (err) {
         console.error('Error during login:', err);
-        if (err.response && err.response.data.message) {
-            error.value = err.response.data.message;  // Set error message to display
-        } else {
-            error.value = 'Invalid credentials or user not found';
-        }
+        error.value = err.response && err.response.data.message
+            ? err.response.data.message
+            : 'Invalid credentials or user not found';
     }
 };
 </script>

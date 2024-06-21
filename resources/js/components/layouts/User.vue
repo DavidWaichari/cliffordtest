@@ -39,7 +39,7 @@
                                     </div>
                                 </div>
                                 <div class="header-right-action">
-                                    <a v-if="userIsAuthenticated || authFromAPI" href="#" class="theme-btn theme-btn-small" @click.prevent="logout">Logout</a>
+                                    <a v-if="isAuthenticated" href="#" class="theme-btn theme-btn-small" @click.prevent="logout">Logout</a>
                                     <div v-else>
                                         <router-link to="/register" class="theme-btn theme-btn-small me-1">Sign Up</router-link>
                                         <router-link to="/login" class="theme-btn theme-btn-small">Login</router-link>
@@ -210,50 +210,42 @@
     </div>
 </template>
 
-<script setup>
-import { useAuthStore } from '../../store.js';
-import {computed, onMounted, ref} from 'vue';
+<script>
+import { ref, onMounted, watch } from 'vue';
+import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
-import axios from "axios";
 
-const authStore = useAuthStore();
-const router = useRouter();
+export default {
+    setup() {
+        const store = useStore();
+        const router = useRouter();
+        const isAuthenticated = ref(false); // Initialize with false
 
-// const userIsAuthenticated = ref(true);
-const userIsAuthenticated = ref(computed(() => !!authStore.token));
-const authFromAPI = ref(true);
-const checkIfAuthenticated = async() => {
-    try {
-        const response  = await axios.get('/api/user');
-        if (response.data.success){
-            userIsAuthenticated.value = true;
-            authFromAPI.value = true;
-        }else{
-            userIsAuthenticated.value = false;
-            authFromAPI.value = false;
-            // router.push('/login');
-        }
-    } catch (error) {
-        console.error("Error checking authentication status:", error);
-        userIsAuthenticated.value = false; // Assume not authenticated on error
+        // Fetch user authentication status from Vuex store
+        const checkAuthStatus = () => {
+            isAuthenticated.value = store.getters.isAuthenticated;
+        };
+
+        // Call the checkAuthStatus method on component mount
+        onMounted(() => {
+            checkAuthStatus();
+        });
+
+        // Watch for changes in isAuthenticated and update header accordingly
+        watch(() => store.getters.isAuthenticated, () => {
+            checkAuthStatus();
+        });
+
+        // Handle logout action
+        const logout = async () => {
+            await store.dispatch('logout');
+            router.push('/login');
+        };
+
+        return {
+            isAuthenticated,
+            logout
+        };
     }
 };
-
-onMounted(() => {
-    checkIfAuthenticated();
-    setInterval(() => {
-        checkIfAuthenticated();
-    }, 5000); // Check authentication status every 15 seconds
-});
-
-const logout = async () => {
-    await authStore.logout();
-    //call logout api
-    await axios.post('/api/auth/logout');
-
-    router.push('/login');
-};
-
-
 </script>
-

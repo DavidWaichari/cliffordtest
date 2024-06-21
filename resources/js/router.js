@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import store from './store/index';
+
 import AdminLayout from './components/layouts/Admin.vue'
 import AdminDashboard from './components/admin/Dashboard.vue';
 import BookingsIndex from './components/admin/bookings/Index.vue';
@@ -136,14 +138,14 @@ const router = createRouter({
     routes,
 });
 
-// Global navigation guard to check for authentication
+//global guard for authentication
 router.beforeEach((to, from, next) => {
-    const isAuthenticated = !!localStorage.getItem('auth_token'); // Check if token exists in localStorage
-    if (to.matched.some(record => record.meta.requiresAuth) && !isAuthenticated) {
+    if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
         next('/login'); // Redirect to login page if not authenticated
     } else {
         next(); // Proceed to the route
     }
 });
+
 
 export default router;

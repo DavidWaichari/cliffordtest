@@ -306,8 +306,9 @@
                                     </a>
                                     <div class="section-block"></div>
                                     <a
-                                        href="index.html"
+                                        href="#"
                                         class="list-group-item list-group-item-action"
+                                        @click.prevent="logout"
                                     >
                                         <div class="msg-body">
                                             <div class="msg-content">
@@ -394,7 +395,7 @@
                         </li>
                         <li>
                             <a href="#"
-                            ><i class="la la-power-off me-2 text-color-11"></i>Logout</a
+                               @click.prevent="logout"><i class="la la-power-off me-2 text-color-11"></i>Logout</a
                             >
                         </li>
                     </ul>
@@ -750,7 +751,7 @@
                                                             <!-- end msg-body -->
                                                         </a>
                                                         <a
-                                                            href="admin-dashboard-settings.html"
+                                                            href="#"
                                                             class="list-group-item list-group-item-action"
                                                         >
                                                             <div class="msg-body">
@@ -764,8 +765,9 @@
                                                         </a>
                                                         <div class="section-block"></div>
                                                         <a
-                                                            href="index.html"
+                                                            href="#"
                                                             class="list-group-item list-group-item-action"
+                                                            @click.prevent="logout"
                                                         >
                                                             <div class="msg-body">
                                                                 <div class="msg-content">
@@ -810,3 +812,20 @@
         <!-- end scroll top -->
     </div>
 </template>
+
+<script setup>
+
+import {useRouter} from "vue-router";
+import { useStore } from 'vuex';
+const store = useStore();
+
+const router = useRouter();
+
+// Handle logout action
+const logout = async () => {
+    await store.dispatch('logout');
+    router.push('/login');
+};
+
+
+</script>
